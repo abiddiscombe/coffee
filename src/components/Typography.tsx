@@ -5,8 +5,8 @@ const cvaTypography = cva("", {
   variants: {
     variant: {
       h1: "text-primary-900",
-      h2: "text-primary-900 text-xl font-semibold mb-4",
-      h3: "text-primary-900 text-lg font-semibold mb-2",
+      h2: "text-primary-900 mb-4 text-xl font-semibold",
+      h3: "text-primary-900 mb-2 text-lg font-semibold",
       body: "text-primary-800 mb-2 last-of-type:mb-6",
     },
   },

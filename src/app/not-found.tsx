@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="p-6 h-full grid place-items-center">
+    <div className="grid h-full place-items-center p-6">
       <div className="text-center">
         <Typography variant="h2">404</Typography>
         <Typography variant="body">No coffee found here!</Typography>

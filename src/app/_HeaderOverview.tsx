@@ -12,7 +12,7 @@ export default function HeaderOverview() {
 
   return (
     <Button variant="ghost" size="icon" onClick={openLink}>
-      <GithubIcon className="w-4.5 h-4.5" />
+      <GithubIcon className="h-4.5 w-4.5" />
     </Button>
   );
 }

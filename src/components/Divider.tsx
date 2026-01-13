@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const cvaDivider = cva("my-6 border-t border-t-primary-200");
+const cvaDivider = cva("border-t-primary-200 my-6 border-t");
 
 export default function Divider(
   p: React.HTMLAttributes<HTMLHRElement> & VariantProps<typeof cvaDivider>,

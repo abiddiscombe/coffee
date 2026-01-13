@@ -19,7 +19,7 @@ export default function OverlayNav() {
   }
 
   return (
-    <nav className="z-50 shadow-sm bg-white/80 backdrop-blur-xs border-b border-b-primary-200 px-4 sm:px-6 py-2 flex gap-4 items-center overflow-x-auto scrollbar-none">
+    <nav className="border-b-primary-200 scrollbar-none z-50 flex items-center gap-4 overflow-x-auto border-b bg-white/80 px-4 py-2 shadow-sm backdrop-blur-xs sm:px-6">
       {LOCATION_FILTERS?.map((filter) => {
         const isActive = activeFilters?.includes(filter.id);
         const isPending = filter.pending;
@@ -35,9 +35,9 @@ export default function OverlayNav() {
             aria-checked={isActive}
             onClick={() => setFilter(filter.id)}
             className={[
-              "rounded-full h-10 min-h-10 sm:h-8 sm:min-h-8 shadow-xs text-sm bg-white",
+              "h-10 min-h-10 rounded-full bg-white text-sm shadow-xs sm:h-8 sm:min-h-8",
               isActive &&
-                "bg-green-100 text-green-800 not:hover:border-green-200 hover:bg-green-200",
+                "not:hover:border-green-200 bg-green-100 text-green-800 hover:bg-green-200",
             ].join(" ")}
           >
             <filter.icon />

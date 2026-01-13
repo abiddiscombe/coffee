@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <NuqsAdapter>
       <html lang="en">
-        <body className="bg-primary-50 h-dvh grid grid-rows-[auto_1fr]">
+        <body className="bg-primary-50 grid h-dvh grid-rows-[auto_1fr]">
           <Header />
           <main>{children}</main>
         </body>

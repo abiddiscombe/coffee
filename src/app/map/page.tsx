@@ -6,9 +6,9 @@ import OverlayPanel from "./_OverlayPanel";
 export default function Page() {
   return (
     <Suspense>
-      <div className="h-full grid grid-rows-1 grid-cols-1 [&>*]:row-1 [&>*]:col-1">
+      <div className="grid h-full grid-cols-1 grid-rows-1 [&>*]:col-1 [&>*]:row-1">
         <Canvas />
-        <div className="z-20 pointer-events-none [&>*]:pointer-events-auto pb-12 flex flex-col justify-between sm:block">
+        <div className="pointer-events-none z-20 flex flex-col justify-between pb-12 sm:block [&>*]:pointer-events-auto">
           <OverlayNav />
           <OverlayPanel />
         </div>

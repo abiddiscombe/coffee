@@ -1,13 +1,14 @@
 {
   "name": "coffee",
+  "type": "module",
   "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "tidy": "prettier ./src --write",
     "lint": "next lint",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier ./src --write"
   },
   "dependencies": {
     "@vis.gl/react-maplibre": "^8.1.0",
@@ -29,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.1.1",
     "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

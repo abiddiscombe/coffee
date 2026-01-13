@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const cvaSurface = cva(
-  "p-4 bg-white overflow-hidden rounded-md border border-primary-200",
+  "border-primary-200 overflow-hidden rounded-md border bg-white p-4",
   {
     variants: {
       shadow: {
@@ -10,7 +10,7 @@ const cvaSurface = cva(
         false: "",
       },
       interactive: {
-        true: "cursor-pointer hover:shadow hover:bg-primary-100 active:bg-primary-200",
+        true: "hover:bg-primary-100 active:bg-primary-200 cursor-pointer hover:shadow",
         false: "",
       },
     },
