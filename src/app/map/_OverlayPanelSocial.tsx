@@ -30,7 +30,7 @@ export default function OverlayPanelSocial(p: {
   return (
     <ul
       className={[
-        "mt-10 grid items-stretch gap-2 justify-evenly",
+        "mt-10 grid items-stretch justify-evenly gap-2",
         items.length >= 3 ? "grid-cols-3" : "grid-cols-2",
       ].join(" ")}
     >
@@ -39,9 +39,9 @@ export default function OverlayPanelSocial(p: {
           <a
             href={item.href}
             target="_blank"
-            className="min-h-20 grid place-items-center"
+            className="grid min-h-20 place-items-center"
           >
-            <div className="text-primary-600 text-xs [&>svg]:text-primary-800 [&>svg]:mx-auto [&>svg]:mb-1.5 [&>svg]:h-5 [&>svg]:w-5">
+            <div className="text-primary-600 [&>svg]:text-primary-800 text-xs [&>svg]:mx-auto [&>svg]:mb-1.5 [&>svg]:h-5 [&>svg]:w-5">
               {item.icon}
               {item.label}
             </div>

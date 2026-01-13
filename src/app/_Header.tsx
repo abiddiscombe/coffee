@@ -4,11 +4,11 @@ import HeaderOverview from "./_HeaderOverview";
 
 export default function Header() {
   return (
-    <header className="bg-white border-b border-b-primary-200 px-4 sm:px-6 py-0.5 min-h-14 flex gap-4 items-center justify-between">
+    <header className="border-b-primary-200 flex min-h-14 items-center justify-between gap-4 border-b bg-white px-4 py-0.5 sm:px-6">
       <Typography variant="h1" className="font-semibold">
         Coffee Map
       </Typography>
-      <hr className="border-none grow" />
+      <hr className="grow border-none" />
       <Tag variant="orange">Beta</Tag>
       <HeaderOverview />
     </header>

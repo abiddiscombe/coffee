@@ -59,7 +59,7 @@ export default function OverlayPanel() {
   return (
     <Surface
       shadow={true}
-      className="transition-fade m-4 min-h-64 max-w-sm p-8 grid place-items-center"
+      className="transition-fade m-4 grid min-h-64 max-w-sm place-items-center p-8"
     >
       {locationInfoLoading ? (
         <OverlayPanelLoading />
@@ -72,7 +72,7 @@ export default function OverlayPanel() {
             />
           ) : (
             <div className="h-full w-full">
-              <div className="mb-4 flex items-start gap-2 justify-between">
+              <div className="mb-4 flex items-start justify-between gap-2">
                 <Typography variant="h2" className="mt-1.5 mb-0">
                   {locationInfo?.name}
                 </Typography>

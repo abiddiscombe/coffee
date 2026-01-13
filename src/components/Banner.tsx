@@ -1,12 +1,12 @@
 import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const cvaBanner = cva("px-4 py-2 shrink-0 rounded border", {
+const cvaBanner = cva("shrink-0 rounded border px-4 py-2", {
   variants: {
     variant: {
-      info: "bg-blue-300/40 text-blue-800 border-blue-200",
-      error: "bg-red-300/40 text-red-800 border-red-200",
-      warning: "bg-orange-300/40 text-orange-800 border-orange-200",
+      info: "border-blue-200 bg-blue-300/40 text-blue-800",
+      error: "border-red-200 bg-red-300/40 text-red-800",
+      warning: "border-orange-200 bg-orange-300/40 text-orange-800",
     },
   },
   defaultVariants: {
