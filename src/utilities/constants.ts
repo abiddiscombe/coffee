@@ -6,9 +6,6 @@ import {
   LaptopIcon,
 } from "lucide-react";
 
-// General
-export const REPO_URL = "https://github.com/abiddiscombe/cheltenham-coffee";
-
 // Unique Query Params
 export const NUQS_KEYS = {
   FILTERS: "filters",
