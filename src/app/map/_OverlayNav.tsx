@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
-import { useQueryState, parseAsArrayOf, parseAsString } from "nuqs";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
 export default function OverlayNav() {
   const [activeFilters, setActiveFilters] = useQueryState(

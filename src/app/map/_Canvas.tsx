@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import { Map, NavigationControl } from "@vis.gl/react-maplibre";
+import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { getBasemapConfig } from "@/utilities/ngdBase";
 import { type Location } from "@/utilities/types/location";
+import { Map, NavigationControl } from "@vis.gl/react-maplibre";
+import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
-import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
+import { useEffect, useState } from "react";
 import Pin from "./_Pin";
 
 export default function Canvas() {

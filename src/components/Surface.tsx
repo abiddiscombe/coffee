@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
 
 const cvaSurface = cva(
   "border-primary-200 overflow-hidden rounded-md border bg-white p-4",

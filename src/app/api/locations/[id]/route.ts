@@ -1,6 +1,6 @@
-import { UUID } from "crypto";
-import { LocationExtended } from "@/utilities/types/location";
 import { getOne } from "@/data/cms";
+import { LocationExtended } from "@/utilities/types/location";
+import { UUID } from "crypto";
 
 export async function GET(
   _: Request,

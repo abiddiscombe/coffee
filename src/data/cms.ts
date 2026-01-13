@@ -1,5 +1,5 @@
+import { CmsResultMultiple, CmsResultSingle } from "@/utilities/types/cms";
 import { UUID } from "crypto";
-import { CmsResultSingle, CmsResultMultiple } from "@/utilities/types/cms";
 
 const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
 const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;

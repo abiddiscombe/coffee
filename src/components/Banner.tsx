@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
 
 const cvaBanner = cva("shrink-0 rounded border px-4 py-2", {
   variants: {

@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
 
 const cvaTag = cva("block shrink-0 rounded px-2.5 py-0.5 text-sm", {
   variants: {
