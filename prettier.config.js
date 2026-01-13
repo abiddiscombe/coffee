@@ -1,6 +1,9 @@
-/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
+/** @type {import('prettier').Config} */
 export default {
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-organize-imports"
+  ],
 
   /**
    * Enables automatic class sorting in CVA functions.

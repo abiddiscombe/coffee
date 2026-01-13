@@ -1,9 +1,9 @@
 import {
-  HeartHandshakeIcon,
-  WifiIcon,
-  PawPrintIcon,
   CloudSunIcon,
+  HeartHandshakeIcon,
   LaptopIcon,
+  PawPrintIcon,
+  WifiIcon,
 } from "lucide-react";
 
 // Unique Query Params

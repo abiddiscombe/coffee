@@ -1,9 +1,9 @@
-import { useQueryState } from "nuqs";
-import { twMerge } from "tailwind-merge";
-import { MapPinIcon } from "lucide-react";
-import { Marker, useMap } from "@vis.gl/react-maplibre";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { Location } from "@/utilities/types/location";
+import { Marker, useMap } from "@vis.gl/react-maplibre";
+import { MapPinIcon } from "lucide-react";
+import { useQueryState } from "nuqs";
+import { twMerge } from "tailwind-merge";
 
 export default function Pin(p: Location) {
   const [activeLocationId, setActiveLocationId] = useQueryState(

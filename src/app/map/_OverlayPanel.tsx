@@ -1,16 +1,16 @@
 "use client";
-import { useQueryState } from "nuqs";
-import { XIcon } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
-import { NUQS_KEYS } from "@/utilities/constants";
-import { LocationExtended } from "@/utilities/types/location";
 import Button from "@/components/Button";
 import Surface from "@/components/Surface";
 import Typography from "@/components/Typography";
+import { NUQS_KEYS } from "@/utilities/constants";
+import { LocationExtended } from "@/utilities/types/location";
+import { XIcon } from "lucide-react";
+import { useQueryState } from "nuqs";
+import { useCallback, useEffect, useState } from "react";
 import OverlayPanelError from "./_OverlayPanelError";
 import OverlayPanelLoading from "./_OverlayPanelLoading";
-import OverlayPanelTags from "./_OverlayPanelTags";
 import OverlayPanelSocial from "./_OverlayPanelSocial";
+import OverlayPanelTags from "./_OverlayPanelTags";
 
 export default function OverlayPanel() {
   const [location, setLocation] = useQueryState(NUQS_KEYS.LOCATION_ID);

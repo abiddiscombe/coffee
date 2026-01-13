@@ -1,6 +1,6 @@
 "use client";
-import { GithubIcon } from "lucide-react";
 import Button from "@/components/Button";
+import { GithubIcon } from "lucide-react";
 
 export default function HeaderOverview() {
   // @todo Replace this link and icon with a dialog.

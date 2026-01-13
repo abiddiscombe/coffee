@@ -1,7 +1,7 @@
-import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Header from "./_Header";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Coffee",

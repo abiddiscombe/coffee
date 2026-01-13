@@ -1,5 +1,5 @@
-import { Location } from "@/utilities/types/location";
 import { getAll } from "@/data/cms";
+import { Location } from "@/utilities/types/location";
 
 export async function GET() {
   const [status, body] = await getAll();

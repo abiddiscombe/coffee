@@ -1,6 +1,6 @@
-import { MapPinIcon, GlobeIcon } from "lucide-react";
 import Surface from "@/components/Surface";
 import { conditionallyInclude } from "@/utilities/helpers";
+import { GlobeIcon, MapPinIcon } from "lucide-react";
 
 export default function OverlayPanelSocial(p: {
   website?: string;
