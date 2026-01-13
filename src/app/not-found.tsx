@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="p-6 h-full grid place-items-center">
       <div className="text-center">
         <Typography variant="h2">404</Typography>
-        <Typography variant="body">No coffee exists here!</Typography>
+        <Typography variant="body">No coffee found here!</Typography>
         <Link href="/map" passHref>
           <Button variant="solid" className="mx-auto cursor-pointer">
             Explore Map
