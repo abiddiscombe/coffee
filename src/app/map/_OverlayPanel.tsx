@@ -65,7 +65,7 @@ export default function OverlayPanel() {
         <OverlayPanelLoading />
       ) : (
         <>
-          {locationInfoError && typeof locationInfo === undefined ? (
+          {locationInfoError ? (
             <OverlayPanelError
               handleRetry={getDetails}
               handleCancel={handleClosePanel}
