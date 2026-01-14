@@ -27,21 +27,22 @@ const cvaButton = cva(
   },
 );
 
-export default function Button(
+export const Button = (
   p: React.ButtonHTMLAttributes<HTMLButtonElement> &
     VariantProps<typeof cvaButton>,
-) {
-  const classes = twMerge(
-    cvaButton({
-      size: p.size,
-      variant: p.variant,
-      className: p.className,
-    }),
-  );
-
+) => {
   return (
-    <button {...p} className={classes}>
+    <button
+      {...p}
+      className={twMerge(
+        cvaButton({
+          size: p.size,
+          variant: p.variant,
+          className: p.className,
+        }),
+      )}
+    >
       {p.children}
     </button>
   );
-}
+};

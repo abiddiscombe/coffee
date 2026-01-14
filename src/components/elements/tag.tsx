@@ -16,16 +16,17 @@ const cvaTag = cva("block shrink-0 rounded px-2.5 py-0.5 text-sm", {
   },
 });
 
-export default function Tag(
+export const Tag = (
   p: React.HTMLAttributes<HTMLElement> & VariantProps<typeof cvaTag>,
-) {
-  const classes = twMerge(
-    cvaTag({ variant: p.variant, className: p.className }),
-  );
-
+) => {
   return (
-    <span {...p} className={classes}>
+    <span
+      {...p}
+      className={twMerge(
+        cvaTag({ variant: p.variant, className: p.className }),
+      )}
+    >
       {p.children}
     </span>
   );
-}
+};

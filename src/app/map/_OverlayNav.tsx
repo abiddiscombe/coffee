@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Button";
+import { Button } from "@/components/elements/button";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 

@@ -15,21 +15,23 @@ const cvaTypography = cva("", {
   },
 });
 
-export default function Typography(
+export const Typography = (
   p: React.HTMLAttributes<HTMLParagraphElement> &
     VariantProps<typeof cvaTypography>,
-) {
+) => {
   const Tag = p.variant === "body" ? "p" : (p.variant ?? "p");
-  const classes = twMerge(
-    cvaTypography({
-      variant: p.variant,
-      className: p.className,
-    }),
-  );
 
   return (
-    <Tag {...p} className={classes}>
+    <Tag
+      {...p}
+      className={twMerge(
+        cvaTypography({
+          variant: p.variant,
+          className: p.className,
+        }),
+      )}
+    >
       {p.children}
     </Tag>
   );
-}
+};

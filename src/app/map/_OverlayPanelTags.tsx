@@ -1,4 +1,4 @@
-import IconList from "@/components/IconList";
+import { IconList } from "@/components/elements/icon-list";
 import { LOCATION_FILTERS } from "@/utilities/constants";
 
 export default function OverlayPanelTags(p: { tags: string[] }) {

@@ -1,4 +1,4 @@
-import Surface from "@/components/Surface";
+import { Surface } from "@/components/elements/surface";
 import { conditionallyInclude } from "@/utilities/helpers";
 import { GlobeIcon, MapPinIcon } from "lucide-react";
 

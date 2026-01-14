@@ -1,7 +1,7 @@
 "use client";
-import Button from "@/components/Button";
-import Surface from "@/components/Surface";
-import Typography from "@/components/Typography";
+import { Button } from "@/components/elements/button";
+import { Surface } from "@/components/elements/surface";
+import { Typography } from "@/components/elements/typography";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { LocationExtended } from "@/utilities/types/location";
 import { XIcon } from "lucide-react";

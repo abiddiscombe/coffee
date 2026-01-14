@@ -5,21 +5,19 @@ const cvaExternalLink = cva(
   "decoration-primary-200 text-inherit underline underline-offset-2 hover:decoration-inherit active:decoration-2",
 );
 
-export default function ExternalLink(
+export const ExternalLink = (
   p: React.AnchorHTMLAttributes<HTMLAnchorElement> &
     VariantProps<typeof cvaExternalLink>,
-) {
-  const classes = twMerge(cvaExternalLink({ className: p.className }));
-
+) => {
   return (
     <a
       {...p}
       target="_blank"
-      className={classes}
+      className={twMerge(cvaExternalLink({ className: p.className }))}
       rel="external nofollow noreferrer"
       aria-label={`${p.children} (Opens in a New Tab)`}
     >
       {p.children}
     </a>
   );
-}
+};

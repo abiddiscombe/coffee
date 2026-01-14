@@ -1,5 +1,5 @@
-import Tag from "@/components/Tag";
-import Typography from "@/components/Typography";
+import { Tag } from "@/components/elements/tag";
+import { Typography } from "@/components/elements/typography";
 import HeaderOverview from "./_HeaderOverview";
 
 export default function Header() {

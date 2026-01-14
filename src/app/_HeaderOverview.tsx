@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Button";
+import { Button } from "@/components/elements/button";
 import { GithubIcon } from "lucide-react";
 
 export default function HeaderOverview() {

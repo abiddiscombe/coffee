@@ -14,16 +14,17 @@ const cvaBanner = cva("shrink-0 rounded border px-4 py-2", {
   },
 });
 
-export default function Banner(
+export const Banner = (
   p: React.HTMLAttributes<HTMLElement> & VariantProps<typeof cvaBanner>,
-) {
-  const classes = twMerge(
-    cvaBanner({ variant: p.variant, className: p.className }),
-  );
-
+) => {
   return (
-    <aside {...p} className={classes}>
+    <aside
+      {...p}
+      className={twMerge(
+        cvaBanner({ variant: p.variant, className: p.className }),
+      )}
+    >
       {p.children}
     </aside>
   );
-}
+};

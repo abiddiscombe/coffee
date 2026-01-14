@@ -21,29 +21,28 @@ const cvaSurface = cva(
   },
 );
 
-export default function Surface(
+export const Surface = (
   p: React.HTMLAttributes<HTMLElement> &
     VariantProps<typeof cvaSurface> & {
       as?: React.ElementType;
       shadow?: boolean;
       interactive?: boolean;
     },
-) {
+) => {
   const Tag = p.as ?? "div";
-  const classes = twMerge(
-    cvaSurface({
-      shadow: p.shadow,
-      interactive: p.interactive,
-      className: p.className,
-    }),
-  );
 
   return (
     <Tag
       {...{ ...p, shadow: undefined, interactive: undefined }}
-      className={classes}
+      className={twMerge(
+        cvaSurface({
+          shadow: p.shadow,
+          interactive: p.interactive,
+          className: p.className,
+        }),
+      )}
     >
       {p.children}
     </Tag>
   );
-}
+};

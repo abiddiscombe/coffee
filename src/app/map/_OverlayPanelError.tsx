@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
-import Typography from "@/components/Typography";
+import { Button } from "@/components/elements/button";
+import { Typography } from "@/components/elements/typography";
 
 export default function OverlayPanelError(p: {
   handleRetry: VoidFunction;

@@ -17,15 +17,15 @@ const cvaSpinner = cva(
   },
 );
 
-export default function Spinner(
+export const Spinner = (
   p: React.HTMLAttributes<HTMLElement> & VariantProps<typeof cvaSpinner>,
-) {
-  const classNameStr = twMerge(
-    cvaSpinner({ size: p.size, className: p.className }),
-  );
-
+) => {
   return (
-    <span {...p} role="status" className={classNameStr}>
+    <span
+      {...p}
+      role="status"
+      className={twMerge(cvaSpinner({ size: p.size, className: p.className }))}
+    >
       <svg
         aria-hidden="true"
         viewBox="0 0 100 101"
@@ -44,4 +44,4 @@ export default function Spinner(
       <span className="sr-only">Loading...</span>
     </span>
   );
-}
+};

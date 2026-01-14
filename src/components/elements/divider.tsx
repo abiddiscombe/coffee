@@ -3,10 +3,10 @@ import { twMerge } from "tailwind-merge";
 
 const cvaDivider = cva("border-t-primary-200 my-6 border-t");
 
-export default function Divider(
+export const Divider = (
   p: React.HTMLAttributes<HTMLHRElement> & VariantProps<typeof cvaDivider>,
-) {
-  const classes = twMerge(cvaDivider({ className: p.className }));
-
-  return <hr {...p} className={classes} />;
-}
+) => {
+  return (
+    <hr {...p} className={twMerge(cvaDivider({ className: p.className }))} />
+  );
+};
