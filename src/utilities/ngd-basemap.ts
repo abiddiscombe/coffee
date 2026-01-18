@@ -1,6 +1,6 @@
 "use client";
 import { type StyleSpecification } from "maplibre-gl";
-import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
+import ngdBaseStyle from "./ngd-basemap-style.json" with { type: "json" };
 
 const getTileUrl = () => {
   if (typeof window === "undefined") {
@@ -45,7 +45,7 @@ export const getBasemapConfig = (): StyleSpecification => {
         tiles: [tileUrl],
       },
     },
-    // @ts-expect-error custom style document
+    // custom style document (blackwhite-3857)
     layers: ngdBaseStyle,
   };
 };
