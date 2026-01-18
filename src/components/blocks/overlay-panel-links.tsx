@@ -1,5 +1,4 @@
 import { Surface } from "@/components/elements/surface";
-import { conditionallyInclude } from "@/utilities/helpers";
 import { GlobeIcon, MapPinIcon } from "lucide-react";
 
 export const OverlayPanelLinks = (p: {
@@ -9,22 +8,34 @@ export const OverlayPanelLinks = (p: {
   const isDesktopViewport = window && window.innerWidth >= 600;
 
   const items = [
-    ...conditionallyInclude(!!p.website, {
-      icon: <GlobeIcon />,
-      href: `https://${p.website}`,
-      label: "Website",
-    }),
-    ...conditionallyInclude(!!p.address, {
-      icon: <MapPinIcon />,
-      href: `https://google.com/maps/dir//${p.address}`,
-      label: "Google Maps",
-    }),
-    ...conditionallyInclude(!!p.address && isDesktopViewport, {
-      // Note: Apple Maps currently only works in desktop.
-      icon: <MapPinIcon />,
-      href: `https://maps.apple.com/directions?destination=${p.address}`,
-      label: "Apple Maps",
-    }),
+    ...(!!p.website
+      ? [
+          {
+            icon: <GlobeIcon />,
+            href: `https://${p.website}`,
+            label: "Website",
+          },
+        ]
+      : []),
+    ...(!!p.address
+      ? [
+          {
+            icon: <MapPinIcon />,
+            href: `https://google.com/maps/dir//${p.address}`,
+            label: "Google Maps",
+          },
+        ]
+      : []),
+    ...(!!p.address && isDesktopViewport
+      ? [
+          {
+            // Note: Apple Maps currently only works in desktop.
+            icon: <MapPinIcon />,
+            href: `https://maps.apple.com/directions?destination=${p.address}`,
+            label: "Apple Maps",
+          },
+        ]
+      : []),
   ];
 
   return (

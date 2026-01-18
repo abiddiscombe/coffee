@@ -17,9 +17,9 @@ export const OverlayPanel = () => {
   const [locationInfoError, setLocationInfoError] = useState(false);
   const [locationInfoLoading, setLocationInfoLoading] = useState(true);
 
-  function handleClosePanel() {
+  const handleClosePanel = () => {
     setLocation(null);
-  }
+  };
 
   const getDetails = useCallback(async () => {
     setLocationInfoError(false);
@@ -39,10 +39,6 @@ export const OverlayPanel = () => {
   }, [location]);
 
   useEffect(() => {
-    if (location) {
-      getDetails();
-    }
-
     return () => {
       // Clear stale data if user selects a
       // new location whilst the panel is visible.

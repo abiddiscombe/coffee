@@ -2,7 +2,7 @@
 import { type StyleSpecification } from "maplibre-gl";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
-function getTileUrl() {
+const getTileUrl = () => {
   if (typeof window === "undefined") {
     // Block attempts to access the 'window' global
     // object in an SSR context (it does not exist).
@@ -16,9 +16,9 @@ function getTileUrl() {
     window.location.host,
     "/api/tiles/vectors/{z}/{y}/{x}",
   ].join("");
-}
+};
 
-export function getBasemapConfig(): StyleSpecification {
+export const getBasemapConfig = (): StyleSpecification => {
   const tileUrl = getTileUrl();
 
   // Ordnance Survey sprite and glyphs don't require
@@ -48,4 +48,4 @@ export function getBasemapConfig(): StyleSpecification {
     // @ts-expect-error custom style document
     layers: ngdBaseStyle,
   };
-}
+};

@@ -1,6 +1,6 @@
 import { getOne } from "@/data/ngdTiles";
 
-function validateTile(zyx: string[]) {
+const validateTile = (zyx: string[]) => {
   if (zyx.length !== 3) {
     return [true, "must consist of three directory-nested values"];
   }
@@ -17,12 +17,12 @@ function validateTile(zyx: string[]) {
   }
 
   return [false, ""];
-}
+};
 
-export async function GET(
+export const GET = async (
   _: Request,
   { params }: { params: Promise<{ zyx: string[] }> },
-) {
+) => {
   const { zyx } = await params;
   const [tileError, tileErrorMessage] = validateTile(zyx);
 
@@ -64,4 +64,4 @@ export async function GET(
       "Cache-Control": "max-age=604800",
     },
   });
-}
+};

@@ -2,10 +2,10 @@ import { getOne } from "@/data/cms";
 import { LocationExtended } from "@/utilities/types/location";
 import { UUID } from "crypto";
 
-export async function GET(
+export const GET = async (
   _: Request,
   { params }: { params: Promise<{ id: UUID }> },
-) {
+) => {
   const { id } = await params;
   const [status, body] = await getOne(id);
 
@@ -37,4 +37,4 @@ export async function GET(
   };
 
   return Response.json(responseBody);
-}
+};

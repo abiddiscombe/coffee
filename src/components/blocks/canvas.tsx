@@ -17,7 +17,7 @@ export const Canvas = () => {
 
   const [locations, setLocations] = useState<Location[]>([]);
 
-  async function getLocations() {
+  const getLocations = async () => {
     const res = await fetch("/api/locations");
 
     if (res.status !== 200) {
@@ -27,9 +27,9 @@ export const Canvas = () => {
 
     const resJson = await res.json();
     setLocations(resJson.locations);
-  }
+  };
 
-  function filterLocationVisibility(location: Location) {
+  const filterLocationVisibility = (location: Location) => {
     if (!appliedFilters?.length) {
       return true;
     }
@@ -46,7 +46,7 @@ export const Canvas = () => {
     }
 
     return true;
-  }
+  };
 
   useEffect(() => {
     getLocations();

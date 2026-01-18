@@ -5,9 +5,9 @@ const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
 const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;
 const CMS_COLLECTION = process.env["NEXT_PRIVATE_CMS_COLLECTION"]!;
 
-export async function getAll(): Promise<
+export const getAll = async (): Promise<
   [number, CmsResultMultiple | undefined]
-> {
+> => {
   const url = new URL(`https://${CMS_HOST}`);
   url.pathname = `/items/${CMS_COLLECTION}`;
 
@@ -24,9 +24,9 @@ export async function getAll(): Promise<
   }
 
   return [res.status, res.status === 200 ? await res.json() : undefined];
-}
+};
 
-export async function getOne(id: UUID): Promise<[number, CmsResultSingle]> {
+export const getOne = async (id: UUID): Promise<[number, CmsResultSingle]> => {
   const url = new URL(`https://${CMS_HOST}`);
   url.pathname = `/items/${CMS_COLLECTION}/${id}`;
 
@@ -37,4 +37,4 @@ export async function getOne(id: UUID): Promise<[number, CmsResultSingle]> {
   });
 
   return [res.status, res.status === 200 ? await res.json() : undefined];
-}
+};

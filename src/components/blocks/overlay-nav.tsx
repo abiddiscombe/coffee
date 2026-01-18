@@ -9,14 +9,14 @@ export const OverlayNav = () => {
     parseAsArrayOf(parseAsString),
   );
 
-  function setFilter(filterId: string) {
+  const setFilter = (filterId: string) => {
     if (activeFilters?.includes(filterId)) {
       setActiveFilters(activeFilters?.filter((item) => item !== filterId));
       return;
     }
 
     setActiveFilters((old) => (old ? [...old, filterId] : [filterId]));
-  }
+  };
 
   return (
     <nav className="border-b-primary-200 scrollbar-none z-50 flex items-center gap-4 overflow-x-auto border-b bg-white/80 px-4 py-2 shadow-sm backdrop-blur-xs sm:px-6">

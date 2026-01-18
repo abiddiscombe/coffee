@@ -1,7 +1,7 @@
 import { getAll } from "@/data/cms";
 import { Location } from "@/utilities/types/location";
 
-export async function GET() {
+export const GET = async () => {
   const [status, body] = await getAll();
 
   if (status !== 200 || !body) {
@@ -23,4 +23,4 @@ export async function GET() {
   };
 
   return Response.json(responseBody);
-}
+};

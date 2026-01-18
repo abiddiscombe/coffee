@@ -12,7 +12,7 @@ export const CanvasMarker = (p: Location) => {
 
   const { current: map } = useMap();
 
-  function handleSelect() {
+  const handleSelect = () => {
     setActiveLocationId(p.id);
 
     if (map && window?.innerWidth <= 800) {
@@ -31,7 +31,7 @@ export const CanvasMarker = (p: Location) => {
 
       map?.flyTo({ center: [p.longitude, adjustedLatitude] });
     }
-  }
+  };
 
   const classes = twMerge(
     "h-8 w-8 sm:h-6 sm:w-6 text-white cursor-pointer duration-150",
