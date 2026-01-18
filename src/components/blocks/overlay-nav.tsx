@@ -3,7 +3,7 @@ import { Button } from "@/components/elements/button";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
-export default function OverlayNav() {
+export const OverlayNav = () => {
   const [activeFilters, setActiveFilters] = useQueryState(
     NUQS_KEYS.FILTERS,
     parseAsArrayOf(parseAsString),
@@ -47,4 +47,4 @@ export default function OverlayNav() {
       })}
     </nav>
   );
-}
+};

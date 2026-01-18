@@ -2,10 +2,10 @@ import { Surface } from "@/components/elements/surface";
 import { conditionallyInclude } from "@/utilities/helpers";
 import { GlobeIcon, MapPinIcon } from "lucide-react";
 
-export default function OverlayPanelSocial(p: {
+export const OverlayPanelLinks = (p: {
   website?: string;
   address?: string;
-}) {
+}) => {
   const isDesktopViewport = window && window.innerWidth >= 600;
 
   const items = [
@@ -50,4 +50,4 @@ export default function OverlayPanelSocial(p: {
       ))}
     </ul>
   );
-}
+};

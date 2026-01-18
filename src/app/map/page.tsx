@@ -1,7 +1,7 @@
+import { Canvas } from "@/components/blocks/canvas";
+import { OverlayNav } from "@/components/blocks/overlay-nav";
+import { OverlayPanel } from "@/components/blocks/overlay-panel";
 import { Suspense } from "react";
-import Canvas from "./_Canvas";
-import OverlayNav from "./_OverlayNav";
-import OverlayPanel from "./_OverlayPanel";
 
 export default function Page() {
   return (

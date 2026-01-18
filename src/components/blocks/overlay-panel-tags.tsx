@@ -1,7 +1,7 @@
 import { IconList } from "@/components/elements/icon-list";
 import { LOCATION_FILTERS } from "@/utilities/constants";
 
-export default function OverlayPanelTags(p: { tags: string[] }) {
+export const OverlayPanelTags = (p: { tags: string[] }) => {
   return (
     <IconList
       className="mt-8"
@@ -20,4 +20,4 @@ export default function OverlayPanelTags(p: { tags: string[] }) {
         .flat()}
     />
   );
-}
+};

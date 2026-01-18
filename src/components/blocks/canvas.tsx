@@ -7,9 +7,9 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
-import Pin from "./_Pin";
+import { CanvasMarker } from "./canvas-marker";
 
-export default function Canvas() {
+export const Canvas = () => {
   const [appliedFilters] = useQueryState(
     NUQS_KEYS.FILTERS,
     parseAsArrayOf(parseAsString),
@@ -73,8 +73,8 @@ export default function Canvas() {
         style={{ margin: "1em", marginTop: "5.6em" }}
       />
       {locations.filter(filterLocationVisibility).map((location) => (
-        <Pin key={location.id} {...location} />
+        <CanvasMarker key={location.id} {...location} />
       ))}
     </Map>
   );
-}
+};

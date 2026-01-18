@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/elements/button";
+import { Spinner } from "@/components/elements/spinner";
 import { Surface } from "@/components/elements/surface";
 import { Typography } from "@/components/elements/typography";
 import { NUQS_KEYS } from "@/utilities/constants";
@@ -7,12 +8,10 @@ import { LocationExtended } from "@/utilities/types/location";
 import { XIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
-import OverlayPanelError from "./_OverlayPanelError";
-import OverlayPanelLoading from "./_OverlayPanelLoading";
-import OverlayPanelSocial from "./_OverlayPanelSocial";
-import OverlayPanelTags from "./_OverlayPanelTags";
+import { OverlayPanelLinks } from "./overlay-panel-links";
+import { OverlayPanelTags } from "./overlay-panel-tags";
 
-export default function OverlayPanel() {
+export const OverlayPanel = () => {
   const [location, setLocation] = useQueryState(NUQS_KEYS.LOCATION_ID);
   const [locationInfo, setLocationInfo] = useState<LocationExtended>();
   const [locationInfoError, setLocationInfoError] = useState(false);
@@ -62,14 +61,27 @@ export default function OverlayPanel() {
       className="transition-fade m-4 grid min-h-64 max-w-sm place-items-center p-8"
     >
       {locationInfoLoading ? (
-        <OverlayPanelLoading />
+        <Spinner />
       ) : (
         <>
           {locationInfoError ? (
-            <OverlayPanelError
-              handleRetry={getDetails}
-              handleCancel={handleClosePanel}
-            />
+            <div className="max-w-xs">
+              <Typography variant="h2">
+                Looks like we need more coffee.
+              </Typography>
+              <Typography variant="body">
+                Sorry, we couldn&apos;t fetch information about this coffee
+                shop.
+              </Typography>
+              <div className="flex items-center gap-2">
+                <Button variant="solid" onClick={getDetails}>
+                  Retry
+                </Button>
+                <Button variant="ghost" onClick={handleClosePanel}>
+                  Cancel
+                </Button>
+              </div>
+            </div>
           ) : (
             <div className="h-full w-full">
               <div className="mb-4 flex items-start justify-between gap-2">
@@ -85,7 +97,7 @@ export default function OverlayPanel() {
               )}
               {(locationInfo?.metadata?.website ||
                 locationInfo?.metadata?.address) && (
-                <OverlayPanelSocial
+                <OverlayPanelLinks
                   website={locationInfo.metadata.website}
                   address={locationInfo.metadata.address}
                 />
@@ -96,4 +108,4 @@ export default function OverlayPanel() {
       )}
     </Surface>
   );
-}
+};

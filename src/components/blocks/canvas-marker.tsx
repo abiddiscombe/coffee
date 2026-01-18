@@ -5,7 +5,7 @@ import { MapPinIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { twMerge } from "tailwind-merge";
 
-export default function Pin(p: Location) {
+export const CanvasMarker = (p: Location) => {
   const [activeLocationId, setActiveLocationId] = useQueryState(
     NUQS_KEYS.LOCATION_ID,
   );
@@ -50,4 +50,4 @@ export default function Pin(p: Location) {
       <MapPinIcon className={classes} onClick={handleSelect} />
     </Marker>
   );
-}
+};
