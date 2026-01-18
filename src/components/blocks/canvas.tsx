@@ -1,6 +1,6 @@
 "use client";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
-import { getBasemapConfig } from "@/utilities/ngdBase";
+import { getBasemapConfig } from "@/utilities/ngd-basemap";
 import { type Location } from "@/utilities/types/location";
 import { Map, NavigationControl } from "@vis.gl/react-maplibre";
 import maplibregl from "maplibre-gl";
@@ -58,11 +58,11 @@ export const Canvas = () => {
       maxZoom={15}
       dragRotate={false}
       touchPitch={false}
-      maxBounds={[-2.308159, 51.83705, -1.865959, 51.971346]}
+      maxBounds={[-1.637993, 50.82177, -1.167297, 50.985667]}
       initialViewState={{
-        zoom: 12.5,
-        latitude: 51.900091,
-        longitude: -2.076931,
+        zoom: 13,
+        latitude: 50.910542,
+        longitude: -1.399105,
       }}
       style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
     >
