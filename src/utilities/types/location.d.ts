@@ -1,10 +1,8 @@
-import { type UUID } from "crypto";
-
 // A slightly less convoluted type definition
 // compared to transporting GeoJSON via the API.
 
 export interface Location {
-  id: UUID;
+  id: string;
   tags: string[];
   latitude: number;
   longitude: number;

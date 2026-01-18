@@ -17,18 +17,6 @@ export const Canvas = () => {
 
   const [locations, setLocations] = useState<Location[]>([]);
 
-  const getLocations = async () => {
-    const res = await fetch("/api/locations");
-
-    if (res.status !== 200) {
-      console.error("Failed to GET '/api/locations'");
-      return;
-    }
-
-    const resJson = await res.json();
-    setLocations(resJson.locations);
-  };
-
   const filterLocationVisibility = (location: Location) => {
     if (!appliedFilters?.length) {
       return true;
@@ -49,7 +37,17 @@ export const Canvas = () => {
   };
 
   useEffect(() => {
-    getLocations();
+    (async () => {
+      const res = await fetch("/api/locations");
+
+      if (res.status !== 200) {
+        console.error("Failed to GET '/api/locations'");
+        return;
+      }
+
+      const resJson = await res.json();
+      setLocations(resJson.locations);
+    })();
   }, []);
 
   return (

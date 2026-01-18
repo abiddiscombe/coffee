@@ -1,12 +1,11 @@
 import { getOne } from "@/data/cms";
 import { LocationExtended } from "@/utilities/types/location";
-import { UUID } from "crypto";
 
 export const GET = async (
   _: Request,
-  { params }: { params: Promise<{ id: UUID }> },
+  { params }: { params: Promise<{ id: string }> },
 ) => {
-  const { id } = await params;
+  const id = (await params).id;
   const [status, body] = await getOne(id);
 
   if (status !== 200) {

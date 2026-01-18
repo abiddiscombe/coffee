@@ -1,7 +1,5 @@
-import { type UUID } from "crypto";
-
 export interface CmsDataEntry {
-  id: UUID;
+  id: string;
   name: string;
   status: "draft" | "archived" | "published";
   metadata_website?: string;

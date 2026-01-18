@@ -1,5 +1,4 @@
 import { CmsResultMultiple, CmsResultSingle } from "@/utilities/types/cms";
-import { UUID } from "crypto";
 
 const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
 const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;
@@ -26,7 +25,9 @@ export const getAll = async (): Promise<
   return [res.status, res.status === 200 ? await res.json() : undefined];
 };
 
-export const getOne = async (id: UUID): Promise<[number, CmsResultSingle]> => {
+export const getOne = async (
+  id: string,
+): Promise<[number, CmsResultSingle]> => {
   const url = new URL(`https://${CMS_HOST}`);
   url.pathname = `/items/${CMS_COLLECTION}/${id}`;
 
