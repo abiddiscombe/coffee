@@ -1,7 +1,7 @@
 import { CmsResultMultiple, CmsResultSingle } from "@/utilities/types/cms";
 
 const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
-const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;
+const CMS_HOST_KEY = process.env["NEXT_PRIVATE_CMS_HOST_KEY"]!;
 const CMS_COLLECTION = process.env["NEXT_PRIVATE_CMS_COLLECTION"]!;
 
 export const getAll = async (): Promise<
@@ -12,7 +12,7 @@ export const getAll = async (): Promise<
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${CMS_TOKEN}`,
+      Authorization: `Basic ${CMS_HOST_KEY}`,
     },
   });
 
@@ -33,7 +33,7 @@ export const getOne = async (
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${CMS_TOKEN}`,
+      Authorization: `Basic ${CMS_HOST_KEY}`,
     },
   });
 

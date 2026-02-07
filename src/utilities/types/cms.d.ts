@@ -1,14 +1,13 @@
 export interface CmsDataEntry {
   id: string;
   name: string;
-  status: "draft" | "archived" | "published";
+  visible: boolean;
+  metadata_tags?: string[];
   metadata_website?: string;
-  metadata_address?: string;
   metadata_summary?: string;
-  geometry: {
+  location: {
     coordinates: [number, number];
   };
-  tags: string[];
 }
 
 export interface CmsResultSingle {
