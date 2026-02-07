@@ -4,7 +4,7 @@ import { Spinner } from "@/components/elements/spinner";
 import { Surface } from "@/components/elements/surface";
 import { Typography } from "@/components/elements/typography";
 import { NUQS_KEYS } from "@/utilities/constants";
-import { LocationExtended } from "@/utilities/types/location";
+import { LocationFeatureExtended } from "@/utilities/types/location";
 import { XIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import { OverlayPanelTags } from "./overlay-panel-tags";
 
 export const OverlayPanel = () => {
   const [location, setLocation] = useQueryState(NUQS_KEYS.LOCATION_ID);
-  const [locationInfo, setLocationInfo] = useState<LocationExtended>();
+  const [locationInfo, setLocationInfo] = useState<LocationFeatureExtended>();
   const [locationInfoError, setLocationInfoError] = useState(false);
   const [locationInfoLoading, setLocationInfoLoading] = useState(true);
 
@@ -34,11 +34,15 @@ export const OverlayPanel = () => {
     }
 
     const resJson = await res.json();
-    setLocationInfo(resJson.location);
+    setLocationInfo(resJson);
     setLocationInfoLoading(false);
   }, [location]);
 
   useEffect(() => {
+    if (location) {
+      getDetails();
+    }
+
     return () => {
       // Clear stale data if user selects a
       // new location whilst the panel is visible.
@@ -82,20 +86,20 @@ export const OverlayPanel = () => {
             <div className="h-full w-full">
               <div className="mb-4 flex items-start justify-between gap-2">
                 <Typography variant="h2" className="mt-1.5 mb-0">
-                  {locationInfo?.name}
+                  {locationInfo?.properties.name}
                 </Typography>
                 <Button size="icon" onClick={handleClosePanel}>
                   <XIcon className="stroke-3" />
                 </Button>
               </div>
-              {locationInfo?.tags && (
-                <OverlayPanelTags tags={locationInfo.tags} />
+              {locationInfo?.properties.metadata.tags && (
+                <OverlayPanelTags
+                  tags={locationInfo.properties.metadata.tags}
+                />
               )}
-              {(locationInfo?.metadata?.website ||
-                locationInfo?.metadata?.address) && (
+              {locationInfo?.properties.metadata?.website && (
                 <OverlayPanelLinks
-                  website={locationInfo.metadata.website}
-                  address={locationInfo.metadata.address}
+                  website={locationInfo.properties.metadata.website}
                 />
               )}
             </div>

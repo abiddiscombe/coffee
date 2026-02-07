@@ -1,7 +1,7 @@
 "use client";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { getBasemapConfig } from "@/utilities/ngd-basemap";
-import { type Location } from "@/utilities/types/location";
+import { type LocationFeature } from "@/utilities/types/location";
 import { Map, NavigationControl } from "@vis.gl/react-maplibre";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -15,9 +15,9 @@ export const Canvas = () => {
     parseAsArrayOf(parseAsString),
   );
 
-  const [locations, setLocations] = useState<Location[]>([]);
+  const [locations, setLocations] = useState<LocationFeature[]>([]);
 
-  const filterLocationVisibility = (location: Location) => {
+  const filterLocationVisibility = (location: LocationFeature) => {
     if (!appliedFilters?.length) {
       return true;
     }
@@ -27,7 +27,7 @@ export const Canvas = () => {
 
       if (
         appliedFilters.includes(filterEntry.id) &&
-        !location.tags.includes(filterEntry.id)
+        !location.properties.metadata.tags.includes(filterEntry.id)
       ) {
         return false;
       }
@@ -46,7 +46,7 @@ export const Canvas = () => {
       }
 
       const resJson = await res.json();
-      setLocations(resJson.locations);
+      setLocations(resJson.features);
     })();
   }, []);
 
@@ -71,7 +71,7 @@ export const Canvas = () => {
         style={{ margin: "1em", marginTop: "5.6em" }}
       />
       {locations.filter(filterLocationVisibility).map((location) => (
-        <CanvasMarker key={location.id} {...location} />
+        <CanvasMarker key={location.properties.id} {...location} />
       ))}
     </Map>
   );

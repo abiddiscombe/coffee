@@ -1,5 +1,5 @@
 import { getOne } from "@/data/cms";
-import { LocationExtended } from "@/utilities/types/location";
+import { LocationFeatureExtended } from "@/utilities/types/location";
 
 export const GET = async (
   _: Request,
@@ -20,18 +20,20 @@ export const GET = async (
     );
   }
 
-  const responseBody: { location: LocationExtended } = {
-    location: {
+  const responseBody: LocationFeatureExtended = {
+    type: "Feature",
+    properties: {
       id: body.data.id,
       name: body.data.name,
-      latitude: body.data.geometry.coordinates[1],
-      longitude: body.data.geometry.coordinates[0],
-      tags: body.data.tags || [],
       metadata: {
+        tags: body.data.metadata_tags ?? [],
         website: body.data.metadata_website,
-        address: body.data.metadata_address,
         summary: body.data.metadata_summary,
       },
+    },
+    geometry: {
+      type: "Point",
+      coordinates: body.data.location.coordinates,
     },
   };
 

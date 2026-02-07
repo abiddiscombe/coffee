@@ -1,12 +1,7 @@
 import { Surface } from "@/components/elements/surface";
-import { GlobeIcon, MapPinIcon } from "lucide-react";
+import { GlobeIcon } from "lucide-react";
 
-export const OverlayPanelLinks = (p: {
-  website?: string;
-  address?: string;
-}) => {
-  const isDesktopViewport = window && window.innerWidth >= 600;
-
+export const OverlayPanelLinks = (p: { website?: string }) => {
   const items = [
     ...(!!p.website
       ? [
@@ -14,25 +9,6 @@ export const OverlayPanelLinks = (p: {
             icon: <GlobeIcon />,
             href: `https://${p.website}`,
             label: "Website",
-          },
-        ]
-      : []),
-    ...(!!p.address
-      ? [
-          {
-            icon: <MapPinIcon />,
-            href: `https://google.com/maps/dir//${p.address}`,
-            label: "Google Maps",
-          },
-        ]
-      : []),
-    ...(!!p.address && isDesktopViewport
-      ? [
-          {
-            // Note: Apple Maps currently only works in desktop.
-            icon: <MapPinIcon />,
-            href: `https://maps.apple.com/directions?destination=${p.address}`,
-            label: "Apple Maps",
           },
         ]
       : []),

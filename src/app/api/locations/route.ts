@@ -1,5 +1,5 @@
 import { getAll } from "@/data/cms";
-import { Location } from "@/utilities/types/location";
+import { LocationFeature } from "@/utilities/types/location";
 
 export const GET = async () => {
   const [status, body] = await getAll();
@@ -13,12 +13,24 @@ export const GET = async () => {
     );
   }
 
-  const responseBody: { locations: Location[] } = {
-    locations: body.data.map((location) => ({
-      id: location.id,
-      tags: location.tags || [],
-      latitude: location.geometry.coordinates[1],
-      longitude: location.geometry.coordinates[0],
+  const responseBody: {
+    type: "FeatureCollection";
+    features: LocationFeature[];
+  } = {
+    type: "FeatureCollection",
+    features: body.data.map((location) => ({
+      type: "Feature",
+      properties: {
+        id: location.id,
+        name: location.name,
+        metadata: {
+          tags: location.metadata_tags ?? [],
+        },
+      },
+      geometry: {
+        type: "Point",
+        coordinates: location.location.coordinates,
+      },
     })),
   };
 

@@ -1,18 +1,25 @@
-// A slightly less convoluted type definition
-// compared to transporting GeoJSON via the API.
+import { type Feature, type Point } from "geojson";
 
-export interface Location {
-  id: string;
-  tags: string[];
-  latitude: number;
-  longitude: number;
-}
+export type LocationFeature = Feature<
+  Point,
+  {
+    id: string;
+    name: string;
+    metadata: {
+      tags: string[];
+    };
+  }
+>;
 
-export interface LocationExtended extends Location {
-  name: string;
-  metadata?: {
-    summary?: string;
-    website?: string;
-    address?: string;
-  };
-}
+export type LocationFeatureExtended = Feature<
+  Point,
+  {
+    id: string;
+    name: string;
+    metadata: {
+      tags: string[];
+      summary?: string;
+      website?: string;
+    };
+  }
+>;
