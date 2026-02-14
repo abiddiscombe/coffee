@@ -1,6 +1,7 @@
 import { Button } from "@/components/elements/button";
+import { Icon } from "@/components/elements/icon";
 import { Tag } from "@/components/elements/tag";
-import { Typography } from "@/components/elements/typography";
+import { TooltipProvider } from "@/components/elements/tooltip";
 import { GithubIcon } from "lucide-react";
 import type { Metadata, Viewport } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -28,23 +29,25 @@ export default function RootLayout({
 }>) {
   return (
     <NuqsAdapter>
-      <html lang="en">
-        <body className="bg-primary-50 grid h-dvh grid-rows-[auto_1fr]">
-          <header className="border-b-primary-200 flex min-h-14 items-center justify-between gap-4 border-b bg-white px-4 py-0.5 sm:px-6">
-            <Typography variant="h1" className="font-semibold">
-              Coffee Map
-            </Typography>
-            <hr className="grow border-none" />
-            <Tag variant="orange">Beta</Tag>
-            <a href="https://github.com/abiddiscombe/coffee" target="_blank">
-              <Button variant="ghost" size="icon">
-                <GithubIcon className="h-4.5 w-4.5" />
-              </Button>
-            </a>
-          </header>
-          <main>{children}</main>
-        </body>
-      </html>
+      <TooltipProvider>
+        <html lang="en">
+          <body className="bg-base-50 grid h-dvh grid-rows-[auto_1fr]">
+            <header className="border-b-base-200 flex min-h-14 items-center justify-between gap-4 border-b bg-white px-4 py-0.5 sm:px-6">
+              <h1>Coffee Map</h1>
+              <hr className="grow border-none" />
+              <Tag variant="orange">Beta</Tag>
+              <a href="https://github.com/abiddiscombe/coffee" target="_blank">
+                <Button variant="ghost" width="box">
+                  <Icon>
+                    <GithubIcon />
+                  </Icon>
+                </Button>
+              </a>
+            </header>
+            <main>{children}</main>
+          </body>
+        </html>
+      </TooltipProvider>
     </NuqsAdapter>
   );
 }

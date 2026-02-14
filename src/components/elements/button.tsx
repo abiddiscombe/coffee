@@ -1,48 +1,114 @@
+import * as SlotUtility from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-const cvaButton = cva(
-  "flex shrink-0 cursor-pointer items-center rounded border",
+const buttonStyles = cva(
+  "flex cursor-pointer items-center shrink-0 rounded border hover:duration-150",
   {
     variants: {
       size: {
-        text: "h-9 max-h-9 gap-3 px-4 [&>svg]:h-4 [&>svg]:w-4",
-        icon: "h-9 max-h-9 w-10 max-w-10 justify-center [&>svg]:h-4 [&>svg]:w-4",
+        sm: "h-7 min-w-7 text-sm",
+        md: "h-9 min-w-9 text-sm",
+        lg: "h-11 min-w-11 text-base",
+      },
+      width: {
+        box: "justify-center",
+        auto: "justify-center",
+        full: "w-full justify-start",
       },
       variant: {
-        ghost:
-          "text-primary-800 hover:bg-primary-100 active:bg-primary-200 hover:border-primary-100 active:border-primary-200 border-none bg-transparent",
-        solid:
-          "bg-primary-950 hover:bg-primary-800 active:bg-primary-700 border-primary-950 hover:border-primary-800 active:border-primary-700 text-white shadow-sm",
-        outline:
-          "text-primary-800 hover:bg-primary-100 active:bg-primary-200 border-primary-200 bg-transparent",
-        destructive:
-          "border-red-600 bg-red-600 text-white shadow-sm hover:border-red-700 hover:bg-red-700 active:border-red-800 active:bg-red-800",
+        ghost: null,
+        primary: null,
+        secondary: null,
+        destructive: null,
       },
     },
     defaultVariants: {
-      size: "text",
-      variant: "outline",
+      size: "md",
+      width: "auto",
+      variant: "secondary",
     },
+    compoundVariants: [
+      {
+        size: "sm",
+        width: ["auto", "full"],
+        className: "gap-2 px-2",
+      },
+      {
+        size: "md",
+        width: ["auto", "full"],
+        className: "gap-2 px-5",
+      },
+      {
+        size: "lg",
+        width: ["auto", "full"],
+        className: "gap-4 px-6",
+      },
+      {
+        variant: "ghost",
+        className: [
+          "text-base-800  [&>svg]:text-base-800 ",
+          "ihover:bg-base-100 iactive:bg-base-200",
+          "ihover:border-base-100 iactive:border-base-200 border-transparent",
+        ],
+      },
+      {
+        variant: "primary",
+        className: [
+          "text-white [&>svg]:text-white",
+          "ihover:bg-accent-700 iactive:bg-accent-800 bg-accent-600",
+          "ihover:border-accent-700 iactive:border-accent-800 border-accent-600",
+        ],
+      },
+      {
+        variant: "secondary",
+        className: [
+          "text-base-800 [&>svg]:text-base-800",
+          " ihover:bg-base-100  iactive:bg-base-200  bg-white",
+          "border-base-300 ",
+        ],
+      },
+      {
+        variant: "destructive",
+        className: [
+          "text-white [&>svg]:text-white",
+          "ihover:bg-destructive-700 iactive:bg-destructive-800  bg-destructive-600 ",
+          "ihover:border-destructive-700 iactive:border-destructive-800  border-destructive-600 ",
+        ],
+      },
+    ],
   },
 );
 
-export const Button = (
-  p: React.ButtonHTMLAttributes<HTMLButtonElement> &
-    VariantProps<typeof cvaButton>,
-) => {
+type ButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonStyles> & {
+    asChild?: boolean;
+  };
+
+export const Button = ({
+  size,
+  width,
+  variant,
+  asChild,
+  className,
+  ...passthrough
+}: ButtonProps) => {
+  const Element = asChild ? SlotUtility.Root : "button";
+
   return (
-    <button
-      {...p}
+    <Element
+      {...passthrough}
       className={twMerge(
-        cvaButton({
-          size: p.size,
-          variant: p.variant,
-          className: p.className,
+        buttonStyles({
+          size,
+          width,
+          variant,
+          className,
         }),
       )}
-    >
-      {p.children}
-    </button>
+    />
   );
 };
+
+Button.displayName = "Button";

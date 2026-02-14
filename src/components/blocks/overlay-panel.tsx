@@ -2,12 +2,15 @@
 import { Button } from "@/components/elements/button";
 import { Spinner } from "@/components/elements/spinner";
 import { Surface } from "@/components/elements/surface";
-import { Typography } from "@/components/elements/typography";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { LocationFeatureExtended } from "@/utilities/types/location";
-import { XIcon } from "lucide-react";
+import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import { RotateCwIcon, XIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
+import { Icon } from "../elements/icon";
+import { ToolGroup } from "../elements/tool-group";
+import { Tooltip, TooltipContent } from "../elements/tooltip";
 import { OverlayPanelLinks } from "./overlay-panel-links";
 import { OverlayPanelTags } from "./overlay-panel-tags";
 
@@ -34,6 +37,16 @@ export const OverlayPanel = () => {
     }
 
     const resJson = await res.json();
+
+    /**
+     * EXPERIMENTAL
+     * Artificial delay to ensure loading state does
+     * not "flicker" - better to look into other ways
+     * to show the loading state / preload core metadata.
+     */
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
+
     setLocationInfo(resJson);
     setLocationInfoLoading(false);
   }, [location]);
@@ -44,8 +57,10 @@ export const OverlayPanel = () => {
     }
 
     return () => {
-      // Clear stale data if user selects a
-      // new location whilst the panel is visible.
+      /**
+       * Clear stale data if user selects a
+       * new location whilst the panel is visible.
+       */
 
       setLocationInfo(undefined);
     };
@@ -57,40 +72,52 @@ export const OverlayPanel = () => {
 
   return (
     <Surface
-      shadow={true}
-      className="transition-fade m-4 grid min-h-64 max-w-sm place-items-center p-8"
+      shadow
+      className="animate-in fade-in slide-in-from-left-10 m-4 grid min-h-64 max-w-sm place-items-center p-6"
     >
       {locationInfoLoading ? (
-        <Spinner />
+        <Spinner size="lg" />
       ) : (
         <>
           {locationInfoError ? (
             <div className="max-w-xs">
-              <Typography variant="h2">
-                Looks like we need more coffee.
-              </Typography>
-              <Typography variant="body">
+              <h2 className="text-lg">Looks like we need more coffee.</h2>
+              <p>
                 Sorry, we couldn&apos;t fetch information about this coffee
                 shop.
-              </Typography>
-              <div className="flex items-center gap-2">
-                <Button variant="solid" onClick={getDetails}>
+              </p>
+              <ToolGroup className="mt-4">
+                <Button variant="primary" onClick={getDetails}>
+                  <Icon>
+                    <RotateCwIcon />
+                  </Icon>
                   Retry
                 </Button>
-                <Button variant="ghost" onClick={handleClosePanel}>
+                <Button variant="secondary" onClick={handleClosePanel}>
                   Cancel
                 </Button>
-              </div>
+              </ToolGroup>
             </div>
           ) : (
             <div className="h-full w-full">
               <div className="mb-4 flex items-start justify-between gap-2">
-                <Typography variant="h2" className="mt-1.5 mb-0">
+                <h2 className="mt-1.5 text-xl">
                   {locationInfo?.properties.name}
-                </Typography>
-                <Button size="icon" onClick={handleClosePanel}>
-                  <XIcon className="stroke-3" />
-                </Button>
+                </h2>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      width="box"
+                      variant="ghost"
+                      onClick={handleClosePanel}
+                    >
+                      <Icon>
+                        <XIcon />
+                      </Icon>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Close Panel</TooltipContent>
+                </Tooltip>
               </div>
               {locationInfo?.properties.metadata.tags && (
                 <OverlayPanelTags

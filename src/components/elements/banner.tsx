@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-const cvaBanner = cva("shrink-0 rounded border px-4 py-2", {
+const bannerStyles = cva("shrink-0 rounded border px-4 py-2", {
   variants: {
     variant: {
       info: "border-blue-200 bg-blue-300/40 text-blue-800",
@@ -14,17 +14,14 @@ const cvaBanner = cva("shrink-0 rounded border px-4 py-2", {
   },
 });
 
-export const Banner = (
-  p: React.HTMLAttributes<HTMLElement> & VariantProps<typeof cvaBanner>,
-) => {
+type BannerProps = React.HTMLAttributes<HTMLElement> &
+  VariantProps<typeof bannerStyles>;
+
+export const Banner = ({ variant, className, ...passthrough }: BannerProps) => {
   return (
     <aside
-      {...p}
-      className={twMerge(
-        cvaBanner({ variant: p.variant, className: p.className }),
-      )}
-    >
-      {p.children}
-    </aside>
+      {...passthrough}
+      className={twMerge(bannerStyles({ variant, className }))}
+    />
   );
 };

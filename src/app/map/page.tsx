@@ -6,9 +6,9 @@ import { Suspense } from "react";
 export default function Page() {
   return (
     <Suspense>
-      <div className="grid h-full grid-cols-1 grid-rows-1 [&>*]:col-1 [&>*]:row-1">
+      <div className="grid h-full grid-cols-1 grid-rows-1 *:col-1 *:row-1">
         <Canvas />
-        <div className="pointer-events-none z-20 flex flex-col justify-between pb-12 sm:block [&>*]:pointer-events-auto">
+        <div className="pointer-events-none z-20 flex flex-col justify-between pb-12 sm:block *:pointer-events-auto">
           <OverlayNav />
           <OverlayPanel />
         </div>

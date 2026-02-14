@@ -34,10 +34,10 @@ export const CanvasMarker = (p: LocationFeature) => {
   };
 
   const classes = twMerge(
-    "h-8 w-8 sm:h-6 sm:w-6 text-white cursor-pointer duration-150",
+    "size-8 sm:size-6 text-white cursor-pointer duration-150 ",
     activeLocationId === p.properties.id
-      ? "fill-primary-950 h-10 w-10 sm:h-8 sm:w-8"
-      : "fill-primary-800 sm:hover:h-7 sm:hover:w-7 hover:fill-primary-900 active:fill-primary-950",
+      ? "fill-accent-800 size-10 sm:size-8 drop-shadow-[0px_2px_2px_#00000090]"
+      : "fill-accent sm:hover:size-7 hover:fill-accent-700 active:fill-accent-800 drop-shadow-[0px_2px_2px_#00000060]",
   );
 
   return (
@@ -45,7 +45,7 @@ export const CanvasMarker = (p: LocationFeature) => {
       anchor="bottom"
       latitude={p.geometry.coordinates[1]}
       longitude={p.geometry.coordinates[0]}
-      className={activeLocationId === p.id ? "z-10" : "hover:z-10"}
+      className={activeLocationId === p.id ? "z-10" : "hover:z-20"}
     >
       <MapPinIcon className={classes} onClick={handleSelect} />
     </Marker>

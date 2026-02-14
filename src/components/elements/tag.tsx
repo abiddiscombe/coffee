@@ -1,7 +1,8 @@
+import * as SlotUtility from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-const cvaTag = cva("block shrink-0 rounded px-2.5 py-0.5 text-sm", {
+const tagStyles = cva("block shrink-0 rounded-full px-3 py-0.5 text-sm", {
   variants: {
     variant: {
       red: "bg-red-200 text-red-700",
@@ -16,17 +17,23 @@ const cvaTag = cva("block shrink-0 rounded px-2.5 py-0.5 text-sm", {
   },
 });
 
-export const Tag = (
-  p: React.HTMLAttributes<HTMLElement> & VariantProps<typeof cvaTag>,
-) => {
+type TagProps = React.HTMLAttributes<HTMLElement> &
+  VariantProps<typeof tagStyles> & {
+    asChild?: boolean;
+  };
+
+export const Tag = ({
+  variant,
+  asChild,
+  className,
+  ...passthrough
+}: TagProps) => {
+  const Element = asChild ? SlotUtility.Root : "span";
+
   return (
-    <span
-      {...p}
-      className={twMerge(
-        cvaTag({ variant: p.variant, className: p.className }),
-      )}
-    >
-      {p.children}
-    </span>
+    <Element
+      {...passthrough}
+      className={twMerge(tagStyles({ variant, className }))}
+    />
   );
 };

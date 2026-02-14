@@ -2,6 +2,7 @@
 import { Button } from "@/components/elements/button";
 import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import { Icon } from "../elements/icon";
 
 export const OverlayNav = () => {
   const [activeFilters, setActiveFilters] = useQueryState(
@@ -19,7 +20,7 @@ export const OverlayNav = () => {
   };
 
   return (
-    <nav className="border-b-primary-200 scrollbar-none z-50 flex items-center gap-4 overflow-x-auto border-b bg-white/80 px-4 py-2 shadow-sm backdrop-blur-xs sm:px-6">
+    <nav className="border-b-base-200 scrollbar-none z-50 flex items-center gap-4 overflow-x-auto border-b bg-white/80 px-4 py-2 shadow-sm backdrop-blur-xs sm:px-6">
       {LOCATION_FILTERS?.map((filter) => {
         const isActive = activeFilters?.includes(filter.id);
         const isPending = filter.pending;
@@ -40,7 +41,9 @@ export const OverlayNav = () => {
                 "not:hover:border-green-200 bg-green-100 text-green-800 hover:bg-green-200",
             ].join(" ")}
           >
-            <filter.icon />
+            <Icon>
+              <filter.icon />
+            </Icon>
             {filter.label}
           </Button>
         );

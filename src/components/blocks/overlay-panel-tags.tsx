@@ -1,23 +1,24 @@
-import { IconList } from "@/components/elements/icon-list";
 import { LOCATION_FILTERS } from "@/utilities/constants";
+import { Icon } from "../elements/icon";
 
 export const OverlayPanelTags = (p: { tags: string[] }) => {
   return (
-    <IconList
-      className="mt-8"
-      items={p.tags
+    <div className="mt-8">
+      {p.tags
         .map((tag) => {
           const matchedTag = LOCATION_FILTERS.find(
             (filterEntry) => filterEntry.id === tag,
           );
-          return matchedTag
-            ? {
-                icon: <matchedTag.icon />,
-                label: `${matchedTag.label}`,
-              }
-            : [];
+          return matchedTag ? (
+            <>
+              <Icon>
+                <matchedTag.icon />
+              </Icon>
+              {matchedTag.label}
+            </>
+          ) : null;
         })
         .flat()}
-    />
+    </div>
   );
 };
