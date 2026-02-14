@@ -7,6 +7,8 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { Spinner } from "../elements/spinner";
 import { CanvasMarker } from "./canvas-marker";
 
 export const Canvas = () => {
@@ -15,7 +17,13 @@ export const Canvas = () => {
     parseAsArrayOf(parseAsString),
   );
 
+  const [mapLoaded, setMapLoaded] = useState<0 | 1 | 2>(0);
   const [locations, setLocations] = useState<LocationFeature[]>([]);
+
+  const onLoadHandler = () => {
+    setMapLoaded(1);
+    setTimeout(() => setMapLoaded(2), 500);
+  };
 
   const filterLocationVisibility = (location: LocationFeature) => {
     if (!appliedFilters?.length) {
@@ -51,28 +59,43 @@ export const Canvas = () => {
   }, []);
 
   return (
-    <Map
-      mapLib={maplibregl}
-      mapStyle={getBasemapConfig()}
-      minZoom={12}
-      maxZoom={15}
-      dragRotate={false}
-      touchPitch={false}
-      maxBounds={[-1.637993, 50.82177, -1.167297, 50.985667]}
-      initialViewState={{
-        zoom: 13,
-        latitude: 50.910542,
-        longitude: -1.399105,
-      }}
-      style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
-    >
-      <NavigationControl
-        showCompass={false}
-        style={{ margin: "1em", marginTop: "5.6em" }}
-      />
-      {locations.filter(filterLocationVisibility).map((location) => (
-        <CanvasMarker key={location.properties.id} {...location} />
-      ))}
-    </Map>
+    <>
+      <Map
+        mapLib={maplibregl}
+        mapStyle={getBasemapConfig()}
+        minZoom={12}
+        maxZoom={15}
+        onLoad={onLoadHandler}
+        dragRotate={false}
+        touchPitch={false}
+        maxBounds={[-1.637993, 50.82177, -1.167297, 50.985667]}
+        initialViewState={{
+          zoom: 13,
+          latitude: 50.910542,
+          longitude: -1.399105,
+        }}
+        style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
+      >
+        <NavigationControl
+          showCompass={false}
+          style={{ margin: "1em", marginTop: "5.6em" }}
+        />
+        {locations.filter(filterLocationVisibility).map((location) => (
+          <CanvasMarker key={location.properties.id} {...location} />
+        ))}
+      </Map>
+      {mapLoaded !== 2 && (
+        <div
+          role="status"
+          aria-hidden={mapLoaded > 0}
+          className={twMerge(
+            "transition-opacity duration-300 aria-hidden:opacity-0",
+            "z-10 bg-linear-to-t from-[#f3f3f4] to-[#ebece7] grid place-items-center",
+          )}
+        >
+          <Spinner size="lg" color="base" />
+        </div>
+      )}
+    </>
   );
 };
