@@ -4,7 +4,7 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 const buttonStyles = cva(
-  "flex cursor-pointer items-center shrink-0 rounded border hover:duration-150",
+  "flex cursor-pointer items-center shrink-0 border hover:duration-150",
   {
     variants: {
       size: {
@@ -13,9 +13,9 @@ const buttonStyles = cva(
         lg: "h-11 min-w-11 text-base",
       },
       width: {
-        box: "justify-center",
-        auto: "justify-center",
-        full: "w-full justify-start",
+        box: "justify-center rounded-full",
+        auto: "justify-center rounded",
+        full: "w-full justify-start rounded",
       },
       variant: {
         ghost: null,

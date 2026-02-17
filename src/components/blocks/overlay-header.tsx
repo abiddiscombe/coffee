@@ -31,7 +31,6 @@ export const OverlayHeader = () => {
               <Button
                 width="box"
                 variant="ghost"
-                className="rounded-lg"
                 aria-label="Toggle the results filtering panel"
               >
                 <Icon>

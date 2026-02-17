@@ -113,7 +113,7 @@ export const OverlayPanel = () => {
                       width="box"
                       variant="ghost"
                       onClick={handleClosePanel}
-                      className="absolute top-1 right-1 rounded-lg"
+                      className="absolute top-1 right-1"
                     >
                       <Icon>
                         <XIcon />
