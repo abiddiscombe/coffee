@@ -8,6 +8,7 @@ import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { RotateCwIcon, XIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 import { Icon } from "../elements/icon";
 import { ToolGroup } from "../elements/tool-group";
 import { Tooltip, TooltipContent } from "../elements/tooltip";
@@ -73,7 +74,12 @@ export const OverlayPanel = () => {
   return (
     <Surface
       shadow
-      className="animate-in fade-in slide-in-from-left-10 m-4 grid min-h-64 max-w-sm place-items-center p-6"
+      className={twMerge(
+        "sm:grow overflow-y-auto scroll-hidden animate-in fade-in grid place-items-center p-2 ",
+
+        /** Overrides for small viewports */
+        "not-sm:border-b-0 not-sm:border-x-0 not-sm:rounded-b-none not-sm:shadow-[0px_0px_30px_-2px_rgba(0,0,0,0.60)]",
+      )}
     >
       {locationInfoLoading ? (
         <Spinner size="lg" />
@@ -99,17 +105,15 @@ export const OverlayPanel = () => {
               </ToolGroup>
             </div>
           ) : (
-            <div className="h-full w-full">
-              <div className="mb-4 flex items-start justify-between gap-2">
-                <h2 className="mt-1.5 text-xl">
-                  {locationInfo?.properties.name}
-                </h2>
+            <div className="h-full w-full space-y-4">
+              <Surface className="relative min-h-42">
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       width="box"
                       variant="ghost"
                       onClick={handleClosePanel}
+                      className="absolute top-1 right-1 rounded-lg"
                     >
                       <Icon>
                         <XIcon />
@@ -118,6 +122,9 @@ export const OverlayPanel = () => {
                   </TooltipTrigger>
                   <TooltipContent>Close Panel</TooltipContent>
                 </Tooltip>
+              </Surface>
+              <div className="px-2">
+                <h2 className="text-2xl">{locationInfo?.properties.name}</h2>
               </div>
               {locationInfo?.properties.metadata.tags && (
                 <OverlayPanelTags

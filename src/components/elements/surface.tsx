@@ -31,8 +31,8 @@ export const Surface = ({
 
   return (
     <Element
-      className={twMerge(surfaceStyles({ shadow, className }))}
       {...passthrough}
+      className={twMerge(surfaceStyles({ shadow, className }))}
     />
   );
 };

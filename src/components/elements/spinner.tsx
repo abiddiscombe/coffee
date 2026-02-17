@@ -29,9 +29,9 @@ export const Spinner = ({
 }: SpinnerProps) => {
   return (
     <div
+      {...passthrough}
       role="status"
       className={spinnerStyles({ size, color, className })}
-      {...passthrough}
     />
   );
 };
