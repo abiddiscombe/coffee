@@ -19,7 +19,10 @@ export type LocationFeatureExtended = Feature<
     metadata: {
       tags: string[];
       summary?: string;
-      website?: string;
+      website?: {
+        href: string;
+        label: string;
+      };
     };
   }
 >;

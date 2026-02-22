@@ -1,6 +1,16 @@
 import { getOne } from "@/data/cms";
 import { LocationFeatureExtended } from "@/utilities/types/location";
 
+const generateWebsiteLink = (href: string) => {
+  /** Remove protocol - enforce HTTPS in response... */
+  const noProtocol = href.replace("http://", "").replace("https://", "");
+
+  return {
+    href: `https://${noProtocol}`,
+    label: noProtocol.split("/")[0].replace("www.", ""),
+  };
+};
+
 export const GET = async (
   _: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -27,8 +37,9 @@ export const GET = async (
       name: body.data.name,
       metadata: {
         tags: body.data.metadata_tags ?? [],
-        website: body.data.metadata_website,
-        summary: body.data.metadata_summary,
+        website: body.data.metadata_website
+          ? generateWebsiteLink(body.data.metadata_website)
+          : undefined,
       },
     },
     geometry: {

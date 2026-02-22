@@ -5,13 +5,13 @@ import { Surface } from "@/components/elements/surface";
 import { useActiveLocation } from "@/hooks/useActiveLocation";
 import { LocationFeatureExtended } from "@/utilities/types/location";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
-import { RotateCwIcon, XIcon } from "lucide-react";
+import { ExternalLinkIcon, RotateCwIcon, XIcon } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "../elements/icon";
+import { Link } from "../elements/link";
 import { ToolGroup } from "../elements/tool-group";
 import { Tooltip, TooltipContent } from "../elements/tooltip";
-import { OverlayPanelLinks } from "./overlay-panel-links";
 import { OverlayPanelTags } from "./overlay-panel-tags";
 
 export const OverlayPanel = () => {
@@ -123,18 +123,29 @@ export const OverlayPanel = () => {
                 </Tooltip>
               </Surface>
               <div className="px-2">
-                <h2 className="mb-4 text-2xl">
+                <h2 className="text-2xl py-2">
                   {locationInfo?.properties.name}
                 </h2>
+                {locationInfo?.properties.metadata?.website && (
+                  <span className="block pb-2">
+                    <Link
+                      target="_blank"
+                      href={locationInfo.properties.metadata.website.href}
+                      className="text-sm flex items-center gap-1 text-base-600 hover:text-base-700"
+                    >
+                      {locationInfo.properties.metadata.website.label}
 
+                      <Icon size="sm">
+                        <ExternalLinkIcon />
+                      </Icon>
+                    </Link>
+                  </span>
+                )}
+              </div>
+              <div className="px-2">
                 {locationInfo?.properties.metadata.tags && (
                   <OverlayPanelTags
                     tags={locationInfo.properties.metadata.tags}
-                  />
-                )}
-                {locationInfo?.properties.metadata?.website && (
-                  <OverlayPanelLinks
-                    website={locationInfo.properties.metadata.website}
                   />
                 )}
               </div>
