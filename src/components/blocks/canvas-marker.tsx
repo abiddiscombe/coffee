@@ -1,19 +1,16 @@
-import { NUQS_KEYS } from "@/utilities/constants";
+import { useActiveLocation } from "@/hooks/useActiveLocation";
 import { LocationFeature } from "@/utilities/types/location";
 import { Marker, useMap } from "@vis.gl/react-maplibre";
 import { MapPinIcon } from "lucide-react";
-import { useQueryState } from "nuqs";
 import { twMerge } from "tailwind-merge";
 
 export const CanvasMarker = (p: LocationFeature) => {
-  const [activeLocationId, setActiveLocationId] = useQueryState(
-    NUQS_KEYS.LOCATION_ID,
-  );
+  const [activeLocation, setActiveLocation] = useActiveLocation();
 
   const { current: map } = useMap();
 
   const handleSelect = () => {
-    setActiveLocationId(p.properties.id);
+    setActiveLocation(p.properties.id);
 
     if (map && window?.innerWidth <= 800) {
       // On mobile viewports, center the map on the selected
@@ -35,7 +32,7 @@ export const CanvasMarker = (p: LocationFeature) => {
 
   const classes = twMerge(
     "size-8 sm:size-6 text-white cursor-pointer duration-150 ",
-    activeLocationId === p.properties.id
+    activeLocation === p.properties.id
       ? "fill-accent-800 size-10 sm:size-8 drop-shadow-[0px_2px_2px_#00000090]"
       : "fill-accent sm:hover:size-7 hover:fill-accent-700 active:fill-accent-800 drop-shadow-[0px_2px_2px_#00000060]",
   );
@@ -45,7 +42,7 @@ export const CanvasMarker = (p: LocationFeature) => {
       anchor="bottom"
       latitude={p.geometry.coordinates[1]}
       longitude={p.geometry.coordinates[0]}
-      className={activeLocationId === p.id ? "z-10" : "hover:z-20"}
+      className={activeLocation === p.id ? "z-10" : "hover:z-20"}
     >
       <MapPinIcon className={classes} onClick={handleSelect} />
     </Marker>

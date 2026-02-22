@@ -2,11 +2,10 @@
 import { Button } from "@/components/elements/button";
 import { Spinner } from "@/components/elements/spinner";
 import { Surface } from "@/components/elements/surface";
-import { NUQS_KEYS } from "@/utilities/constants";
+import { useActiveLocation } from "@/hooks/useActiveLocation";
 import { LocationFeatureExtended } from "@/utilities/types/location";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { RotateCwIcon, XIcon } from "lucide-react";
-import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "../elements/icon";
@@ -16,13 +15,13 @@ import { OverlayPanelLinks } from "./overlay-panel-links";
 import { OverlayPanelTags } from "./overlay-panel-tags";
 
 export const OverlayPanel = () => {
-  const [location, setLocation] = useQueryState(NUQS_KEYS.LOCATION_ID);
+  const [location, setLocation] = useActiveLocation();
   const [locationInfo, setLocationInfo] = useState<LocationFeatureExtended>();
   const [locationInfoError, setLocationInfoError] = useState(false);
   const [locationInfoLoading, setLocationInfoLoading] = useState(true);
 
   const handleClosePanel = () => {
-    setLocation(null);
+    setLocation();
   };
 
   const getDetails = useCallback(async () => {
@@ -124,18 +123,21 @@ export const OverlayPanel = () => {
                 </Tooltip>
               </Surface>
               <div className="px-2">
-                <h2 className="text-2xl">{locationInfo?.properties.name}</h2>
+                <h2 className="mb-4 text-2xl">
+                  {locationInfo?.properties.name}
+                </h2>
+
+                {locationInfo?.properties.metadata.tags && (
+                  <OverlayPanelTags
+                    tags={locationInfo.properties.metadata.tags}
+                  />
+                )}
+                {locationInfo?.properties.metadata?.website && (
+                  <OverlayPanelLinks
+                    website={locationInfo.properties.metadata.website}
+                  />
+                )}
               </div>
-              {locationInfo?.properties.metadata.tags && (
-                <OverlayPanelTags
-                  tags={locationInfo.properties.metadata.tags}
-                />
-              )}
-              {locationInfo?.properties.metadata?.website && (
-                <OverlayPanelLinks
-                  website={locationInfo.properties.metadata.website}
-                />
-              )}
             </div>
           )}
         </>

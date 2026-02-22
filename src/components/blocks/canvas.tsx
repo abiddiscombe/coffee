@@ -1,21 +1,19 @@
 "use client";
-import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
+
+import { useActiveFilters } from "@/hooks/useActiveFilters";
+import { filters } from "@/utilities/filters";
 import { getBasemapConfig } from "@/utilities/ngd-basemap";
 import { type LocationFeature } from "@/utilities/types/location";
 import { Map, NavigationControl } from "@vis.gl/react-maplibre";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Spinner } from "../elements/spinner";
 import { CanvasMarker } from "./canvas-marker";
 
 export const Canvas = () => {
-  const [appliedFilters] = useQueryState(
-    NUQS_KEYS.FILTERS,
-    parseAsArrayOf(parseAsString),
-  );
+  const [activeFilters] = useActiveFilters();
 
   const [mapLoaded, setMapLoaded] = useState<0 | 1 | 2>(0);
   const [locations, setLocations] = useState<LocationFeature[]>([]);
@@ -26,15 +24,15 @@ export const Canvas = () => {
   };
 
   const filterLocationVisibility = (location: LocationFeature) => {
-    if (!appliedFilters?.length) {
+    if (!activeFilters?.length) {
       return true;
     }
 
-    for (let i = 0; i < LOCATION_FILTERS.length; i++) {
-      const filterEntry = LOCATION_FILTERS[i];
+    for (let i = 0; i < filters.length; i++) {
+      const filterEntry = filters[i];
 
       if (
-        appliedFilters.includes(filterEntry.id) &&
+        activeFilters.includes(filterEntry.id) &&
         !location.properties.metadata.tags.includes(filterEntry.id)
       ) {
         return false;

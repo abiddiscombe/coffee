@@ -1,24 +1,12 @@
 "use client";
 import { Button } from "@/components/elements/button";
-import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
-import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import { useActiveFilters } from "@/hooks/useActiveFilters";
+import { filters } from "@/utilities/filters";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "../elements/icon";
 
 export const OverlayHeaderFilters = () => {
-  const [activeFilters, setActiveFilters] = useQueryState(
-    NUQS_KEYS.FILTERS,
-    parseAsArrayOf(parseAsString),
-  );
-
-  const setFilter = (filterId: string) => {
-    if (activeFilters?.includes(filterId)) {
-      setActiveFilters(activeFilters?.filter((item) => item !== filterId));
-      return;
-    }
-
-    setActiveFilters((old) => (old ? [...old, filterId] : [filterId]));
-  };
+  const [activeFilters, toggleFilters] = useActiveFilters();
 
   return (
     <div>
@@ -26,13 +14,8 @@ export const OverlayHeaderFilters = () => {
         Filter locations...
       </span>
       <div className="grid grid-cols-2 gap-2">
-        {LOCATION_FILTERS?.map((filter) => {
+        {filters?.map((filter) => {
           const isActive = activeFilters?.includes(filter.id);
-          const isPending = filter.pending;
-
-          if (isPending) {
-            return null;
-          }
 
           return (
             <Button
@@ -42,16 +25,14 @@ export const OverlayHeaderFilters = () => {
               role="checkbox"
               variant="ghost"
               aria-checked={isActive}
-              onClick={() => setFilter(filter.id)}
+              onClick={() => toggleFilters(filter.id)}
               className={twMerge(
                 !!activeFilters?.length && "text-base-500",
                 isActive &&
                   "border-accent-100 bg-accent-100 *:stroke-accent-900 text-accent-900 aria-checked:ihover:bg-accent-200 aria-checked:ihover:border-accent-200",
               )}
             >
-              <Icon size="sm">
-                <filter.icon />
-              </Icon>
+              <Icon size="sm">{filter.icon}</Icon>
               {filter.label}
             </Button>
           );
