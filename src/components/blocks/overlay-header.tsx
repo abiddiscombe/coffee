@@ -24,7 +24,10 @@ export const OverlayHeader = () => {
             shadow
             className="p-1 not-sm:py-2 border-0 flex items-center z-10 not-sm:rounded-t-none"
           >
-            <h1 className="not-sm:text-lg px-2 grow font-medium tracking-tight text-primary-950">
+            <h1
+              id="logo"
+              className="text-lg font-light px-2 grow tracking-tight text-primary-950"
+            >
               Coffee Explorer
             </h1>
             <CollapsiblePrimitive.Trigger asChild>

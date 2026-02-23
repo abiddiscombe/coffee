@@ -85,13 +85,15 @@ export const OverlayPanel = () => {
       ) : (
         <>
           {locationInfoError ? (
-            <div className="max-w-xs">
-              <h2 className="text-lg">Looks like we need more coffee.</h2>
+            <div className="max-w-xs py-10">
+              <h2 className="text-3xl font-bold mb-2">
+                Looks like we need some more coffee.
+              </h2>
               <p>
-                Sorry, we couldn&apos;t fetch information about this coffee
-                shop.
+                We couldn&apos;t fetch information about this coffee shop.
+                Please try again later.
               </p>
-              <ToolGroup className="mt-4">
+              <ToolGroup className="mt-6">
                 <Button variant="primary" onClick={getDetails}>
                   <Icon>
                     <RotateCwIcon />
@@ -123,7 +125,7 @@ export const OverlayPanel = () => {
                 </Tooltip>
               </Surface>
               <div className="px-2">
-                <h2 className="text-2xl py-2">
+                <h2 className="text-3xl py-2 font-bold">
                   {locationInfo?.properties.name}
                 </h2>
                 {locationInfo?.properties.metadata?.website && (
