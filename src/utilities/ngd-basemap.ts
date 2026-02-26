@@ -45,7 +45,7 @@ export const getBasemapConfig = (): StyleSpecification => {
         tiles: [tileUrl],
       },
     },
-    // custom style document (light-3857)
+    // custom style document (outdoor-3857)
     layers: ngdBaseStyle,
   };
 };
