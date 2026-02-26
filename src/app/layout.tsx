@@ -7,8 +7,8 @@ import "./globals.css";
 const gabarito = Gabarito({ weight: "variable" });
 
 export const metadata: Metadata = {
-  title: "Coffee",
-  description: "A web map of coffee shops with support for location filtering.",
+  title: "Southmapton Coffee Map",
+  description: "A web map of coffee shops in Southampton.",
 };
 
 export const viewport: Viewport = {

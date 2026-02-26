@@ -1,5 +1,5 @@
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
-import { Settings2Icon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { Button } from "../elements/button";
 import { Icon } from "../elements/icon";
@@ -8,7 +8,7 @@ import { OverlayHeaderFilters } from "./overlay-header-filters";
 
 export const OverlayHeader = () => {
   return (
-    <CollapsiblePrimitive.Root asChild>
+    <CollapsiblePrimitive.Root asChild defaultOpen>
       <Surface
         asChild
         shadow
@@ -24,20 +24,21 @@ export const OverlayHeader = () => {
             shadow
             className="p-1 not-sm:py-2 border-0 flex items-center z-10 not-sm:rounded-t-none"
           >
-            <h1
-              id="logo"
-              className="text-lg font-light px-2 grow tracking-tight text-primary-950"
-            >
-              Coffee Explorer
+            <h1 id="logo" className="px-2 grow text-primary-700">
+              <strong className="font-semibold text-primary-900">
+                Southampton
+              </strong>{" "}
+              Coffee Map
             </h1>
             <CollapsiblePrimitive.Trigger asChild>
               <Button
                 width="box"
                 variant="ghost"
                 aria-label="Toggle the results filtering panel"
+                className="data-[state=open]:*:rotate-180 *:transition-transform"
               >
                 <Icon>
-                  <Settings2Icon />
+                  <ChevronDownIcon />
                 </Icon>
               </Button>
             </CollapsiblePrimitive.Trigger>
