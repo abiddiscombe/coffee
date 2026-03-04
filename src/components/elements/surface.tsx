@@ -2,17 +2,21 @@ import * as SlotUtility from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { commonSurface } from "../common";
 
-const surfaceStyles = cva(["p-4 rounded-xl", commonSurface], {
+const surfaceStyles = cva(["p-4 rounded-xl border-base-200 border "], {
   variants: {
     shadow: {
       true: "shadow",
       false: null,
     },
+    transparency: {
+      true: "bg-white/85 backdrop-blur-md",
+      false: "bg-white",
+    },
   },
   defaultVariants: {
     shadow: false,
+    transparency: true,
   },
 });
 

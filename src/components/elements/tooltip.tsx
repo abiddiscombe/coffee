@@ -1,7 +1,6 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
-import { commonSurface } from "../common";
 
 type TooltipProviderProps = React.ComponentProps<
   typeof TooltipPrimitive.Provider
@@ -41,7 +40,7 @@ export const TooltipContent = ({
       side={side ?? "bottom"}
       sideOffset={sideOffset ?? 6}
       className={twMerge(
-        commonSurface,
+        "border-base-200 border bg-white",
         "shadow-sm rounded-md w-max px-2 py-1 text-center text-xs",
         "animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95",
         className,

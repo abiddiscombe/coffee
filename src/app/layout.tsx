@@ -1,3 +1,4 @@
+import { Header } from "@/components/blocks/header";
 import { TooltipProvider } from "@/components/elements/tooltip";
 import type { Metadata, Viewport } from "next";
 import { Gabarito } from "next/font/google";
@@ -27,7 +28,10 @@ export default function RootLayout({
     <NuqsAdapter>
       <TooltipProvider>
         <html lang="en" className={gabarito.className}>
-          <body className="bg-base-50 h-dvh">{children}</body>
+          <body className="bg-base-50 grid grid-rows-[auto_1fr] h-dvh">
+            <Header />
+            {children}
+          </body>
         </html>
       </TooltipProvider>
     </NuqsAdapter>
