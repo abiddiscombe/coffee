@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.12",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@types/geojson": "^7946.0.16",
     "@vis.gl/react-maplibre": "^8.1.0",

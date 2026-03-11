@@ -74,7 +74,10 @@ export const Canvas = () => {
         }}
         style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
       >
-        <NavigationControl showCompass={false} style={{ margin: "1.6em" }} />
+        <NavigationControl
+          showCompass={false}
+          style={{ marginRight: "1.3em", marginTop: "5em" }}
+        />
         {locations.filter(filterLocationVisibility).map((location) => (
           <CanvasMarker key={location.properties.id} {...location} />
         ))}

@@ -14,7 +14,7 @@ import { ToolGroup } from "../elements/tool-group";
 import { Tooltip, TooltipContent } from "../elements/tooltip";
 import { OverlayPanelTags } from "./overlay-panel-tags";
 
-export const OverlayPanel = () => {
+export const OverlayPanel = ({ className }: React.ComponentProps<"div">) => {
   const [location, setLocation] = useActiveLocation();
   const [locationInfo, setLocationInfo] = useState<LocationFeatureExtended>();
   const [locationInfoError, setLocationInfoError] = useState(false);
@@ -74,10 +74,8 @@ export const OverlayPanel = () => {
     <Surface
       shadow
       className={twMerge(
-        "sm:grow overflow-y-auto scroll-hidden animate-in fade-in grid place-items-center p-2 ",
-
-        /** Overrides for small viewports */
-        "not-sm:border-b-0 not-sm:border-x-0 not-sm:rounded-b-none not-sm:shadow-[0px_0px_30px_-2px_rgba(0,0,0,0.60)]",
+        className,
+        "overflow-y-auto scroll-hidden animate-in fade-in grid place-items-center p-2",
       )}
     >
       {locationInfoLoading ? (

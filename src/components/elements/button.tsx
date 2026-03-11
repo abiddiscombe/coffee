@@ -38,7 +38,7 @@ const buttonStyles = cva(
       {
         size: "md",
         width: ["auto", "full"],
-        className: "gap-2 px-5",
+        className: "gap-3 px-4",
       },
       {
         size: "lg",
