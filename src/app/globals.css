@@ -57,6 +57,12 @@
 }
 
 @layer base {
+  @media screen and (max-width: 680px) {
+    html {
+      font-size: 1.08rem;
+    }
+  }
+
   /* Disable overscroll support on mobile devices
     to improve map functionality and control */
 
