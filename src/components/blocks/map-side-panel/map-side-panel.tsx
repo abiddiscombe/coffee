@@ -1,0 +1,175 @@
+"use client";
+import { Button } from "@/components/elements/button";
+import { Spinner } from "@/components/elements/spinner";
+import { Surface } from "@/components/elements/surface";
+import { useActiveLocation } from "@/utilities/hooks/useActiveLocation";
+import { LocationFeatureExtended } from "@/utilities/types/location";
+import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import {
+  ExternalLinkIcon,
+  MessageCircleQuestionIcon,
+  RotateCwIcon,
+  Share2Icon,
+  XIcon,
+} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { twJoin } from "tailwind-merge";
+import { Icon } from "../../elements/icon";
+import { Link } from "../../elements/link";
+import { ToolGroup } from "../../elements/tool-group";
+import { Tooltip, TooltipContent } from "../../elements/tooltip";
+import { MapSidePanelTags } from "./map-side-panel-tags";
+
+export const MapSidePanel = ({ className }: React.ComponentProps<"div">) => {
+  const [location, setLocation] = useActiveLocation();
+  const [locationInfo, setLocationInfo] = useState<LocationFeatureExtended>();
+  const [locationInfoError, setLocationInfoError] = useState(false);
+  const [locationInfoLoading, setLocationInfoLoading] = useState(true);
+
+  const handleClosePanel = () => {
+    setLocation();
+  };
+
+  const getDetails = useCallback(async () => {
+    setLocationInfoError(false);
+    setLocationInfoLoading(true);
+    const res = await fetch(`/api/locations/${location}`);
+
+    if (res.status !== 200) {
+      console.warn(`Failed to GET '/api/locations/${location}'`);
+      setLocationInfoError(true);
+      setLocationInfoLoading(false);
+      return;
+    }
+
+    const resJson = await res.json();
+
+    /**
+     * EXPERIMENTAL
+     * Artificial delay to ensure loading state does
+     * not "flicker" - better to look into other ways
+     * to show the loading state / preload core metadata.
+     */
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
+
+    setLocationInfo(resJson);
+    setLocationInfoLoading(false);
+  }, [location]);
+
+  useEffect(() => {
+    if (location) {
+      getDetails();
+    }
+
+    return () => {
+      /**
+       * Clear stale data if user selects a
+       * new location whilst the panel is visible.
+       */
+
+      setLocationInfo(undefined);
+    };
+  }, [location, getDetails]);
+
+  return (
+    <div className="pointer-events-none *:pointer-events-auto z-20 flex sm:justify-start sm:items-stretch justify-items-stretch items-end sm:p-4">
+      {location && (
+        <Surface
+          shadow
+          transparent
+          className={twJoin(
+            "overflow-y-auto w-full sm:max-w-[22em] scroll-hidden animate-in slide-in-from-left-10 fade-in grid place-items-center p-4",
+            "not-sm:border-b-0 not-sm:border-x-0 not-sm:rounded-b-none not-sm:shadow-[0px_0px_30px_-2px_rgba(0,0,0,0.60)] not-sm:slide-in-from-bottom-20",
+          )}
+        >
+          {locationInfoLoading ? (
+            <Spinner size="lg" />
+          ) : (
+            <>
+              {locationInfoError ? (
+                <div className="max-w-xs py-10">
+                  <h2 className="text-3xl font-bold mb-2">
+                    Looks like we need some more coffee.
+                  </h2>
+                  <p>
+                    We couldn&apos;t fetch information about this coffee shop.
+                    Please try again later.
+                  </p>
+                  <ToolGroup className="mt-6">
+                    <Button variant="primary" onClick={getDetails}>
+                      <Icon>
+                        <RotateCwIcon />
+                      </Icon>
+                      Retry
+                    </Button>
+                    <Button variant="secondary" onClick={handleClosePanel}>
+                      Cancel
+                    </Button>
+                  </ToolGroup>
+                </div>
+              ) : (
+                <div className="h-full w-full space-y-4">
+                  <ToolGroup className="gap-1">
+                    <Button width="box" variant="ghost">
+                      <Icon>
+                        <MessageCircleQuestionIcon />
+                      </Icon>
+                    </Button>
+                    <Button width="box" variant="ghost">
+                      <Icon>
+                        <Share2Icon />
+                      </Icon>
+                    </Button>
+                    <hr className="border-0 grow" />
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          width="box"
+                          variant="ghost"
+                          onClick={handleClosePanel}
+                        >
+                          <Icon>
+                            <XIcon />
+                          </Icon>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Close Panel</TooltipContent>
+                    </Tooltip>
+                  </ToolGroup>
+                  <div className="px-2">
+                    <h2 className="text-3xl py-2 font-bold">
+                      {locationInfo?.properties.name}
+                    </h2>
+                    {locationInfo?.properties.metadata?.website && (
+                      <span className="block pb-2">
+                        <Link
+                          target="_blank"
+                          href={locationInfo.properties.metadata.website.href}
+                          className="text-sm flex items-center gap-1 text-base-600 hover:text-base-700"
+                        >
+                          {locationInfo.properties.metadata.website.label}
+
+                          <Icon size="sm">
+                            <ExternalLinkIcon />
+                          </Icon>
+                        </Link>
+                      </span>
+                    )}
+                  </div>
+                  <div className="px-2">
+                    {locationInfo?.properties.metadata.tags && (
+                      <MapSidePanelTags
+                        tags={locationInfo.properties.metadata.tags}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </Surface>
+      )}
+    </div>
+  );
+};

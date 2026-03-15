@@ -1,8 +1,8 @@
 import { filters } from "@/utilities/filters";
 import { useMemo } from "react";
-import { Icon } from "../elements/icon";
+import { Icon } from "../../elements/icon";
 
-export const OverlayPanelTags = (p: { tags: string[] }) => {
+export const MapSidePanelTags = (p: { tags: string[] }) => {
   const matchedTags = useMemo(() => {
     return p.tags
       .map((tag) => {

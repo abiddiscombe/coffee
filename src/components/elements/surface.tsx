@@ -3,20 +3,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-const surfaceStyles = cva(["p-4 rounded-xl border-base-200 border "], {
+const surfaceStyles = cva("p-4 rounded-xl border-base-200 border", {
   variants: {
     shadow: {
       true: "shadow",
       false: null,
     },
-    transparency: {
-      true: "bg-white/85 backdrop-blur-md",
+    transparent: {
+      true: "bg-white/90 backdrop-blur-lg",
       false: "bg-white",
     },
   },
   defaultVariants: {
     shadow: false,
-    transparency: true,
+    transparent: false,
   },
 });
 
@@ -27,6 +27,7 @@ type SurfaceProps = React.ComponentProps<"div"> &
 
 export const Surface = ({
   shadow,
+  transparent,
   asChild,
   className,
   ...passthrough
@@ -36,7 +37,7 @@ export const Surface = ({
   return (
     <Element
       {...passthrough}
-      className={twMerge(surfaceStyles({ shadow, className }))}
+      className={twMerge(surfaceStyles({ shadow, transparent, className }))}
     />
   );
 };

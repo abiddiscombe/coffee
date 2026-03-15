@@ -1,18 +1,18 @@
 "use client";
 
-import { useActiveFilters } from "@/hooks/useActiveFilters";
 import { filters } from "@/utilities/filters";
+import { useActiveFilters } from "@/utilities/hooks/useActiveFilters";
 import { getBasemapConfig } from "@/utilities/ngd-basemap";
 import { type LocationFeature } from "@/utilities/types/location";
-import { Map, NavigationControl } from "@vis.gl/react-maplibre";
+import { Map } from "@vis.gl/react-maplibre";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { Spinner } from "../elements/spinner";
-import { CanvasMarker } from "./canvas-marker";
+import { Spinner } from "../../elements/spinner";
+import { MapCanvasMarker } from "./map-canvas-marker";
 
-export const Canvas = () => {
+export const MapCanvas = () => {
   const [activeFilters] = useActiveFilters();
 
   const [mapLoaded, setMapLoaded] = useState<0 | 1 | 2>(0);
@@ -59,6 +59,7 @@ export const Canvas = () => {
   return (
     <>
       <Map
+        id="mapA"
         mapLib={maplibregl}
         mapStyle={getBasemapConfig()}
         minZoom={12}
@@ -74,12 +75,8 @@ export const Canvas = () => {
         }}
         style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
       >
-        <NavigationControl
-          showCompass={false}
-          style={{ marginRight: "1.3em", marginTop: "5em" }}
-        />
         {locations.filter(filterLocationVisibility).map((location) => (
-          <CanvasMarker key={location.properties.id} {...location} />
+          <MapCanvasMarker key={location.properties.id} {...location} />
         ))}
       </Map>
       {mapLoaded !== 2 && (

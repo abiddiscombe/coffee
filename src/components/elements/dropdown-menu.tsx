@@ -1,5 +1,6 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { twMerge } from "tailwind-merge";
+import { Surface } from "./surface";
 
 export const DropdownMenu = ({
   ...passthrough
@@ -24,12 +25,8 @@ export const DropdownMenuContent = ({
   ...passthrough
 }: DropdownMenuPrimitive.DropdownMenuContentProps) => {
   return (
-    <DropdownMenuPrimitive.Content
-      {...passthrough}
-      className={twMerge(
-        "bg-white border border-base-200 rounded-lg p-2 shadow-lg ",
-        className,
-      )}
-    />
+    <Surface shadow asChild className={twMerge("p-2", className)}>
+      <DropdownMenuPrimitive.Content {...passthrough} />
+    </Surface>
   );
 };

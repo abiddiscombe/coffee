@@ -1,5 +1,5 @@
-import { Header } from "@/components/blocks/header";
-import { TooltipProvider } from "@/components/elements/tooltip";
+import { Header } from "@/components/blocks/header/header";
+import { TooltipProvider } from "@/utilities/providers/tooltip";
 import type { Metadata, Viewport } from "next";
 import { Gabarito } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";

@@ -1,6 +1,6 @@
 "use client";
 import { type StyleSpecification } from "maplibre-gl";
-import ngdBaseStyle from "./ngd-basemap-style.json" with { type: "json" };
+import ngdBaseStyle from "./themes-lyrs-light.json" with { type: "json" };
 
 const getTileUrl = () => {
   if (typeof window === "undefined") {

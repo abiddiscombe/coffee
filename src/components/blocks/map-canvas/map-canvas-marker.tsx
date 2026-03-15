@@ -1,10 +1,10 @@
-import { useActiveLocation } from "@/hooks/useActiveLocation";
+import { useActiveLocation } from "@/utilities/hooks/useActiveLocation";
 import { LocationFeature } from "@/utilities/types/location";
 import { Marker, useMap } from "@vis.gl/react-maplibre";
 import { MapPinIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-export const CanvasMarker = (p: LocationFeature) => {
+export const MapCanvasMarker = (p: LocationFeature) => {
   const [activeLocation, setActiveLocation] = useActiveLocation();
 
   const { current: map } = useMap();
