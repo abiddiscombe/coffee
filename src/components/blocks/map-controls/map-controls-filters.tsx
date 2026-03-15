@@ -21,7 +21,7 @@ export const MapControlsFilters = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button width="box" className="relative">
+        <Button width="box" className="relative shadow">
           <Icon className={hasActiveFilters ? "*:stroke-accent" : ""}>
             <FilterIcon />
           </Icon>

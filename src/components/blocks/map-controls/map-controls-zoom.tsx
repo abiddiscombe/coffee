@@ -16,7 +16,7 @@ export const MapControlsZoom = () => {
   };
 
   return (
-    <div>
+    <div className="shadow">
       <Button
         width="box"
         className="border-b-0 rounded-b-none"
